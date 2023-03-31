@@ -1,0 +1,14 @@
+.content {
+	margin: auto;
+	// max-width: 1420px;
+	.user {
+		border-radius: 20px;
+		max-width: 400px;
+		min-width: 320px;
+		width: 30vw;
+	}
+	.tasks {
+		border-radius: 20px !important;
+		overflow: hidden;
+	}
+}

@@ -1,0 +1,59 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar color="light" class="px-2">
+		<ion-back-button slot="start" defaultHref="team"></ion-back-button>
+		<ion-menu-button slot="end"></ion-menu-button>
+	</ion-toolbar>
+</ion-header>
+<ion-content color="light" *ngIf="data">
+	<section class="d-none content w-100 h-100 p-3 d-md-flex">
+		<div class="user h-100 mr-3 d-flex flex-column">
+			<ion-card
+				class="d-flex shadow-none justify-content-between w-100 m-0 p-3 mb-3"
+			>
+				<ion-card-title> Balance: </ion-card-title>
+				<ion-card-title class="font-weight-bold">
+					{{ data?.balance?.value }} {{ data?.balance?.coin }}
+				</ion-card-title>
+			</ion-card>
+			<app-user-info
+				class="w-100 h-100 sahdow"
+				[data]="data"
+			></app-user-info>
+		</div>
+		<div class="w-100 d-flex flex-column">
+			<app-filter-form
+				(output)="onFilterFormOutput($event)"
+			></app-filter-form>
+			<app-devices-list-watcher
+				class="w-100 h-100"
+				[filters]="filters"
+				(output)="onDevicesListOutput($event)"
+			></app-devices-list-watcher>
+		</div>
+	</section>
+	<ion-slides class="d-md-none w-100 h-100" pager="true">
+		<ion-slide class="w-100 h-100 p-3 d-flex flex-column">
+			<ion-card
+				class="d-flex shadow-none justify-content-between w-100 m-0 p-3 mb-3"
+			>
+				<ion-card-title> Balance: </ion-card-title>
+				<ion-card-title class="font-weight-bold">
+					{{ data?.balance?.value }} {{ data?.balance?.coin }}
+				</ion-card-title>
+			</ion-card>
+			<app-user-info class="w-100 h-100" [data]="data"></app-user-info>
+		</ion-slide>
+		<ion-slide class="w-100 h-100 devices">
+			<div class="w-100 d-flex flex-column">
+				<app-filter-form
+					(output)="onFilterFormOutput($event)"
+				></app-filter-form>
+				<app-devices-list-watcher
+					class="w-100 h-100"
+					[filters]="filters"
+					(output)="onDevicesListOutput($event)"
+				></app-devices-list-watcher>
+			</div>
+		</ion-slide>
+	</ion-slides>
+</ion-content>

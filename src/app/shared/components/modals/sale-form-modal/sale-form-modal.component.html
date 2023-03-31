@@ -1,0 +1,12 @@
+<app-modal-header
+	title="{{ data ? 'Edit' : 'Create' }} Sale"
+	(close)="onCloseButtonClick()"
+></app-modal-header>
+
+<ion-content color="light">
+	<app-sale-form
+		[data]="data"
+		[edit]="edit"
+		(output)="onFormOutput($event)"
+	></app-sale-form>
+</ion-content>

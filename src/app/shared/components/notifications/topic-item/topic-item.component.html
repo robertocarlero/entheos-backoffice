@@ -1,0 +1,13 @@
+<ion-item color="light">
+	<ion-icon
+		slot="start"
+		name="{{ data?.icon || 'notifications' }}-outline"
+	></ion-icon>
+	<ion-label>{{ data?.title }}</ion-label>
+	<ion-toggle
+		slot="end"
+		[checked]="isActive"
+		mode="ios"
+		(click)="onToggleClick($event)"
+	></ion-toggle>
+</ion-item>

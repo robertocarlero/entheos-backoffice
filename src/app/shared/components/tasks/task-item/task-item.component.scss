@@ -1,0 +1,32 @@
+#container {
+	.left {
+		.avatar {
+			width: 45px;
+			height: 45px;
+			background: var(--ion-color-dark);
+			color: var(--ion-color-light);
+			small {
+				font-size: 14px;
+				position: relative;
+				top: 2px;
+				&:last-child {
+					top: -2px;
+				}
+			}
+		}
+	}
+	.right {
+		width: calc(100% - 53px);
+		.color-item {
+			width: 26px;
+			height: 26px;
+			min-width: 26px;
+			min-height: 26px;
+			border-radius: 500px;
+			font-size: 18px;
+		}
+		.content {
+			border-radius: 20px;
+		}
+	}
+}

@@ -1,0 +1,66 @@
+<ion-card id="container" class="m-0 shadow-sm" color="dark">
+	<ion-toolbar class="px-3" color="dark">
+		<p class="text-secondary">Quantity: {{ data?.quantity }}</p>
+		<small slot="end">
+			{{ data?.sale_id }}
+		</small>
+	</ion-toolbar>
+	<ion-item-sliding #item class="mb-3" [disabled]="!user.isAdmin">
+		<ion-item
+			color="dark"
+			mode="md"
+			class="ion-no-border"
+			lines="none"
+			button
+			(click)="onClick()"
+		>
+			<app-avatar
+				class="avatar mr-2"
+				[src]="image"
+				[alt]="customer?.name"
+			></app-avatar>
+			<ion-label>
+				{{ customer?.name }}
+				<p class="m-0 text-secondary">
+					{{ data?.description }}
+				</p>
+			</ion-label>
+			<ion-buttons slot="end">
+				<ion-button
+					color="medium"
+					(click)="onOptionsButtonClick($event)"
+					*ngIf="user.isAdmin || user.isEditor"
+				>
+					<ion-icon
+						slot="icon-only"
+						name="ellipsis-vertical"
+					></ion-icon>
+				</ion-button>
+			</ion-buttons>
+		</ion-item>
+		<ion-item-options side="end">
+			<ion-item-option
+				(click)="onEraseOptionClick()"
+				color="danger"
+				*ngIf="user.isAdmin"
+			>
+				<ion-buttons>
+					<ion-button>
+						<ion-icon slot="icon-only" name="trash"></ion-icon>
+					</ion-button>
+				</ion-buttons>
+			</ion-item-option>
+			<ion-item-option
+				color="success"
+				(click)="onEditOptionClick()"
+				*ngIf="user.isAdmin || user.isEditor"
+			>
+				<ion-buttons>
+					<ion-button color="light">
+						<ion-icon slot="icon-only" name="pencil"></ion-icon>
+					</ion-button>
+				</ion-buttons>
+			</ion-item-option>
+		</ion-item-options>
+	</ion-item-sliding>
+</ion-card>

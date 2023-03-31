@@ -1,0 +1,64 @@
+<div class="w-100 p-3 overflow-visible d-flex flex-column align-items-center">
+	<form class="w-100" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+		<fieldset formGroupName="notification">
+			<mat-form-field class="w-100" appearance="outline">
+				<mat-label>Title</mat-label>
+				<input
+					#a
+					matInput
+					required
+					formControlName="title"
+					placeholder="New Notification"
+					[errorStateMatcher]="matcher"
+					(keyup.enter)="b?.focus(); b?.open()"
+				/>
+				<mat-error
+					*ngIf="form?.get('notification')?.get('title')?.invalid"
+				>
+					<app-errors
+						[errors]="
+							form?.get('notification')?.get('title')?.errors
+						"
+					>
+					</app-errors>
+				</mat-error>
+			</mat-form-field>
+			<mat-form-field class="w-100" appearance="outline">
+				<mat-label>Description</mat-label>
+				<textarea
+					#b
+					matInput
+					required
+					formControlName="body"
+					placeholder="This is a general message..."
+					[errorStateMatcher]="matcher"
+				></textarea>
+				<mat-error
+					*ngIf="form?.get('notification')?.get('body')?.invalid"
+				>
+					<app-errors
+						[errors]="
+							form?.get('notification')?.get('body')?.errors
+						"
+					></app-errors>
+				</mat-error>
+			</mat-form-field>
+		</fieldset>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Topic</mat-label>
+			<mat-select
+				required
+				formControlName="topic"
+				[errorStateMatcher]="matcher"
+			>
+				<mat-option value="general">General</mat-option>
+			</mat-select>
+			<mat-error *ngIf="form.get('topic')?.invalid">
+				<app-errors [errors]="form.get('topic')?.errors"></app-errors>
+			</mat-error>
+		</mat-form-field>
+	</form>
+</div>
+<div class="float-button">
+	<app-save-button (click)="onSaveButtonClick()" size="big"></app-save-button>
+</div>

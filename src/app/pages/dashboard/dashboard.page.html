@@ -1,0 +1,92 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar color="light" class="px-2">
+		<ion-back-button slot="start" defaultHref="customers"></ion-back-button>
+		<ion-menu-button slot="end"></ion-menu-button>
+	</ion-toolbar>
+</ion-header>
+<ion-content color="light">
+	<section class="d-none content w-100 h-100 p-3 d-lg-flex">
+		<section class="w-100 h-100 mr-3">
+			<ion-toolbar color="light" mode="ios" class="my-3">
+				<ion-segment #segment [value]="devices_lists[0]?.name">
+					<ng-container *ngFor="let item of devices_lists">
+						<ion-segment-button [value]="item?.name">
+							<ion-label color="dark">
+								{{ item?.name | titlecase}}
+							</ion-label>
+						</ion-segment-button>
+					</ng-container>
+				</ion-segment>
+			</ion-toolbar>
+			<ng-container *ngFor="let item of devices_lists">
+				<app-devices-list
+					class="w-100 h-100"
+					*ngIf="item.name === segment?.value"
+					[data]="item?.list"
+					[add]="false"
+					(output)="onDevicesListOutput($event)"
+				></app-devices-list>
+			</ng-container>
+		</section>
+		<section class="w-100 h-100">
+			<app-tasks-list
+				*ngIf="overdue_tasks?.is_active"
+				class="w-100"
+				[data]="overdue_tasks"
+				[add]="false"
+				(output)="onOneTasksListOutput($event)"
+			></app-tasks-list>
+			<app-tasks-list
+				*ngIf="tasks"
+				class="w-100"
+				[data]="tasks"
+				[add]="false"
+				(output)="onOneTasksListOutput($event)"
+			></app-tasks-list>
+		</section>
+	</section>
+	<ion-slides class="d-lg-none w-100 h-100" pager="true">
+		<ion-slide class="w-100 h-100">
+			<section class="w-100 h-100 mr-3 mb-3">
+				<ion-toolbar color="light" mode="ios" class="my-3">
+					<ion-segment #segment [value]="devices_lists[0]?.name">
+						<ng-container *ngFor="let item of devices_lists">
+							<ion-segment-button [value]="item?.name">
+								<ion-label color="dark">
+									{{ item?.name | titlecase}}
+								</ion-label>
+							</ion-segment-button>
+						</ng-container>
+					</ion-segment>
+				</ion-toolbar>
+				<ng-container *ngFor="let item of devices_lists">
+					<app-devices-list
+						class="w-100 h-100"
+						*ngIf="item.name === segment?.value"
+						[data]="item?.list"
+						[add]="false"
+						(output)="onDevicesListOutput($event)"
+					></app-devices-list>
+				</ng-container>
+			</section>
+		</ion-slide>
+		<ion-slide class="w-100 h-100">
+			<section class="w-100 h-100">
+				<app-tasks-list
+					class="w-100"
+					*ngIf="overdue_tasks?.is_active"
+					[data]="overdue_tasks"
+					[add]="false"
+					(output)="onOneTasksListOutput($event)"
+				></app-tasks-list>
+				<app-tasks-list
+					*ngIf="tasks"
+					class="w-100"
+					[data]="tasks"
+					[add]="false"
+					(output)="onOneTasksListOutput($event)"
+				></app-tasks-list>
+			</section>
+		</ion-slide>
+	</ion-slides>
+</ion-content>

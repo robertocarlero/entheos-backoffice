@@ -1,0 +1,117 @@
+ion-split-pane {
+	.padding {
+		border: 0;
+		max-width: 80px !important;
+		min-width: 0;
+		z-index: 0;
+		--background: var(--ion-color-light);
+	}
+	ion-menu {
+		.hidden {
+			width: 100%;
+			min-width: 250px;
+			height: 100%;
+			ion-content {
+				--background: var(
+					--ion-item-background,
+					var(--ion-background-color, #fff)
+				);
+				ion-avatar {
+					position: relative;
+					left: -5px;
+				}
+				ion-item {
+					--transition: none;
+					&.selected {
+						--color: var(--ion-color-dark);
+					}
+				}
+				.footer-button {
+					cursor: pointer;
+					height: 40px;
+					overflow: hidden;
+					width: calc(100% - 20px);
+					background: var(--ion-color-primary);
+					margin: 10px;
+					border-radius: 10px;
+					position: fixed;
+					bottom: 0;
+					display: flex;
+					align-items: center;
+					ion-icon {
+						min-width: 30px;
+						margin: 5px;
+						font-size: 28px;
+					}
+					ion-label {
+						font-weight: 500;
+						margin: auto 18px;
+						font-size: 16px;
+					}
+				}
+			}
+		}
+		ion-list {
+			padding: 20px 0;
+			ion-item {
+				color: var(--ion-color-medium);
+				margin-right: 10px;
+				font-weight: 500;
+				--padding-start: 18px;
+				border-radius: 0 10px 10px 0;
+				--padding-start: 16px;
+				--min-height: 50px;
+				ion-icon {
+					font-size: 24px;
+					color: var(--ion-color-medium);
+					min-width: 25px;
+				}
+				&.selected {
+					color: var(--ion-color-dark);
+					--background: var(--ion-color-primary);
+					ion-icon {
+						color: var(--ion-color-dark);
+					}
+				}
+				&:hover {
+					ion-icon {
+						color: var(--ion-color-dark);
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	ion-split-pane {
+		ion-menu {
+			max-width: 280px;
+			height: calc(100vh - 40px);
+			margin: 20px;
+			border-radius: 15px;
+			width: 60px;
+			min-width: 60px;
+			z-index: 100000;
+			position: fixed;
+			overflow: hidden;
+			&:hover {
+				width: auto;
+				ion-list {
+					ion-item {
+						&.selected {
+							width: calc(100% - 10px);
+						}
+					}
+				}
+			}
+			ion-list {
+				ion-item {
+					&.selected {
+						width: 50px;
+					}
+				}
+			}
+		}
+	}
+}

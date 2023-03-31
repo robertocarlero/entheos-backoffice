@@ -1,0 +1,41 @@
+<ion-toolbar class="toolbar-sticky py-2 px-3" *ngIf="search && !color">
+	<app-searchbar (output)="onSearchbarOutput($event)"></app-searchbar>
+</ion-toolbar>
+<ion-toolbar
+	[color]="color"
+	class="toolbar-sticky py-2 px-3"
+	*ngIf="search && !!color"
+>
+	<app-searchbar (output)="onSearchbarOutput($event)"></app-searchbar>
+</ion-toolbar>
+
+<section class="w-100 px-3">
+	<div class="my-3" *ngFor="let item of data?.items">
+		<app-transaction-item
+			(output)="onOneItemOutput($event)"
+			[data]="item"
+		></app-transaction-item>
+	</div>
+</section>
+
+<ion-fab
+	*ngIf="add"
+	[class.float-button]="fixed"
+	horizontal="end"
+	vertical="bottom"
+	slot="fixed"
+>
+	<app-add-button (click)="onAddButtonClick()" size="big"></app-add-button>
+</ion-fab>
+
+<ion-infinite-scroll
+	*ngIf="data?.is_infinite"
+	threshold="100px"
+	(ionInfinite)="onScrollShot($event)"
+>
+	<ion-infinite-scroll-content
+		loadingSpinner="crescent"
+		loadingText="Cargando..."
+	>
+	</ion-infinite-scroll-content>
+</ion-infinite-scroll>

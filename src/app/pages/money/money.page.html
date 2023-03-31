@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar color="light" class="px-2">
+		<ion-back-button slot="start">
+			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+		</ion-back-button>
+		<ion-menu-button slot="end"></ion-menu-button>
+	</ion-toolbar>
+</ion-header>
+<ion-content color="light">
+	<div class="content mx-auto app-max-width w-100 h-100">
+		<div class="p-3">
+			<ion-card
+				class="header w-100 d-flex shadow-sm align-items-center m-0"
+			>
+				<div class="content p-3 py-4">
+					<ion-card-title mode="md" class="font-weight-bold">
+						Hello {{name}}
+					</ion-card-title>
+					<p class="mt-2">Tu balance</p>
+					<ion-card-title
+						mode="md"
+						class="font-weight-bold"
+						color="primary"
+					>
+						{{user?.balance?.value}} {{user?.balance?.coin}}
+					</ion-card-title>
+				</div>
+				<figure class="asset">
+					<img src="assets/img/banknote-amico.svg" alt="" />
+				</figure>
+			</ion-card>
+		</div>
+		<section class="content w-100 h-100 py-3 d-flex flex-column">
+			<app-filter-form
+				(output)="onFilterFormOutput($event)"
+			></app-filter-form>
+			<app-transactions-list-watcher
+				class="w-100 h-100"
+				[filters]="filters"
+				(output)="onTransactionsListOutput($event)"
+				[add]="user?.isAdmin"
+			></app-transactions-list-watcher>
+		</section>
+	</div>
+</ion-content>

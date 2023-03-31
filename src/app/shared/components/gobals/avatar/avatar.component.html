@@ -1,0 +1,13 @@
+<ion-thumbnail
+	class="d-flex justify-content-center align-items-center rounded {{ size }}"
+	[class.rounded-circle]="rounded"
+>
+	<ng-container *ngIf="src">
+		<img [class]="fit" [src]="src" class="w-100 h-100" [alt]="alt" />
+	</ng-container>
+	<ng-container *ngIf="!src">
+		<ion-label color="primary" class="font-weight-bold text-uppercase">
+			{{ alt ? alt[0] : '?' }}
+		</ion-label>
+	</ng-container>
+</ion-thumbnail>

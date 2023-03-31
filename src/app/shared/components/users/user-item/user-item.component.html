@@ -1,0 +1,15 @@
+<ion-item
+	mode="md"
+	color="light"
+	class="ion-no-border"
+	[button]="button"
+	[detail]="detail"
+	[disabled]="disabled"
+	[lines]="line ? 'line' : 'none'"
+>
+	<app-user-avatar class="avatar mr-2" [data]="data"></app-user-avatar>
+	<ion-label>
+		{{ data?.name }}
+		<p class="m-0 text-secondary">{{ data?.dni }}</p>
+	</ion-label>
+</ion-item>

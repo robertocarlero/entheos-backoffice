@@ -1,0 +1,51 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar color="light" class="px-2">
+		<ion-back-button slot="start">
+			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+		</ion-back-button>
+		<ion-menu-button slot="end"></ion-menu-button>
+	</ion-toolbar>
+</ion-header>
+<ion-content color="light">
+	<div class="content mx-auto app-max-width w-100 h-100">
+		<div class="p-3">
+			<ion-card
+				color="dark"
+				class="header w-100 d-flex shadow-sm align-items-center m-0"
+			>
+				<div class="content p-3 py-4">
+					<ion-card-title mode="md" class="font-weight-bold">
+						Hello {{name}}
+					</ion-card-title>
+					<p class="mt-2">
+						“Ora como si todo dependiera de Dios. Trabaja como si
+						todo dependiera de ti”
+					</p>
+				</div>
+				<figure class="asset">
+					<img src="assets/img/shared-workspace-amico.svg" alt="" />
+				</figure>
+			</ion-card>
+		</div>
+		<ion-toolbar color="light" mode="ios" class="my-3">
+			<ion-segment #segment [value]="devices_lists[0]?.name">
+				<ng-container *ngFor="let item of devices_lists">
+					<ion-segment-button [value]="item?.name">
+						<ion-label color="dark">
+							{{ item?.name | titlecase}}
+						</ion-label>
+					</ion-segment-button>
+				</ng-container>
+			</ion-segment>
+		</ion-toolbar>
+		<ng-container *ngFor="let item of devices_lists">
+			<app-devices-list
+				fixed="true"
+				class="w-100 h-100"
+				*ngIf="item.name === segment?.value"
+				[data]="item?.list"
+				(output)="onDevicesListOutput($event)"
+			></app-devices-list>
+		</ng-container>
+	</div>
+</ion-content>

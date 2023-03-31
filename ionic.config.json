@@ -1,0 +1,7 @@
+{
+  "name": "EnTheos - Admin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

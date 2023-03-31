@@ -1,0 +1,8 @@
+<app-modal-header (close)="onCloseButtonClick()"></app-modal-header>
+
+<ion-content color="light">
+	<app-transaction-detail
+		[data]="data"
+		(output)="onComponentOutput($event)"
+	></app-transaction-detail>
+</ion-content>

@@ -1,0 +1,65 @@
+<ion-app>
+	<ion-split-pane contentId="main-content">
+		<ion-content
+			color="light"
+			*ngIf="display_padding"
+			class="padding m-0 rounded-0 d-none d-md-flex"
+		></ion-content>
+		<ion-menu contentId="main-content" disabled>
+			<div class="hidden">
+				<ion-content class="dark-theme">
+					<ion-item lines="none">
+						<ion-avatar slot="start">
+							<img
+								style="object-fit: contain"
+								src="assets/appicon-white.svg"
+								alt=""
+							/>
+						</ion-avatar>
+						<app-logo class="mt-3" style="width: 130px"></app-logo>
+					</ion-item>
+					<ion-list lines="none">
+						<ion-menu-toggle
+							[autoHide]="false"
+							*ngFor="let item of items; let i = index"
+						>
+							<ion-item
+								[routerLink]="item.url"
+								routerLinkActive="selected"
+								routerDirection="root"
+								detail="false"
+								*ngIf="
+									item?.roles?.includes(user?.profile?.role)
+								"
+							>
+								<ion-icon
+									slot="start"
+									[src]="
+										'assets/icons/' +
+										item.icon +
+										'-solid.svg'
+									"
+								></ion-icon>
+								<ion-label>
+									{{ item.title | titlecase }}
+								</ion-label>
+							</ion-item>
+						</ion-menu-toggle>
+					</ion-list>
+					<ion-menu-toggle
+						[autoHide]="true"
+						matRipple
+						class="footer-button"
+						routerLink="settings"
+					>
+						<ion-icon name="settings"></ion-icon>
+						<ion-label>
+							{{ 'Settings' | titlecase }}
+						</ion-label>
+					</ion-menu-toggle>
+				</ion-content>
+			</div>
+		</ion-menu>
+		<ion-router-outlet id="main-content"></ion-router-outlet>
+	</ion-split-pane>
+</ion-app>

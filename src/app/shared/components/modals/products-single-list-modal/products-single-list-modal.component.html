@@ -1,0 +1,11 @@
+<app-modal-header
+	[title]="data?.title"
+	(close)="onCloseButtonClick()"
+></app-modal-header>
+
+<ion-content color="light" class="ion-padding">
+	<app-products-single-list
+		[data]="data"
+		(output)="onListOutput($event)"
+	></app-products-single-list>
+</ion-content>

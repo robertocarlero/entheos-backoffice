@@ -1,0 +1,23 @@
+<ion-toolbar color="light" class="toolbar-sticky py-2" *ngIf="search">
+	<app-searchbar (output)="onSearchbarOutput($event)"></app-searchbar>
+</ion-toolbar>
+
+<section class="w-100 h-100">
+	<ng-container *ngFor="let item of data?.items">
+		<app-device-single-item
+			(click)="onOneItemClick(item)"
+			[data]="item"
+			[line]="line"
+			[button]="button"
+			[detail]="detail"
+		></app-device-single-item>
+	</ng-container>
+</section>
+
+<ion-infinite-scroll threshold="100px" (ionInfinite)="onScrollShot($event)">
+	<ion-infinite-scroll-content
+		loadingSpinner="crescent"
+		loadingText="Cargando..."
+	>
+	</ion-infinite-scroll-content>
+</ion-infinite-scroll>

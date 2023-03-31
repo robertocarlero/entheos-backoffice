@@ -1,0 +1,60 @@
+<ion-card id="container" class="m-0 shadow-sm">
+	<ion-toolbar class="px-3">
+		<ion-label>
+			{{ data?.type | titlecase }}
+		</ion-label>
+		<ion-text slot="end">
+			<small>
+				{{ data?.code }}
+			</small>
+		</ion-text>
+	</ion-toolbar>
+	<ion-item-sliding #item class="mb-3" [disabled]="!user.isAdmin">
+		<ion-item
+			mode="md"
+			class="ion-no-border"
+			lines="none"
+			button
+			(click)="onClick()"
+		>
+			<ion-avatar
+				[style.background]="data?.color"
+				class="avatar d-flex flex-column justify-content-center align-items-center shadow-sm"
+			>
+				<small>{{ data?.date?.toDate() | date: 'dd' }}</small>
+				<small>
+					{{ data?.date?.toDate() | date: 'MMM' | uppercase }}
+				</small>
+			</ion-avatar>
+			<ion-label class="ml-2"
+				>{{ data?.amount?.value }} {{ data?.amount?.coin }}
+				<p class="m-0 text-secondary">
+					{{ data?.description || '...' }}
+				</p>
+			</ion-label>
+			<ion-buttons slot="end">
+				<ion-button
+					color="medium"
+					(click)="onOptionsButtonClick($event)"
+					*ngIf="user.isAdmin"
+				>
+					<ion-icon
+						slot="icon-only"
+						name="ellipsis-vertical"
+					></ion-icon>
+				</ion-button>
+			</ion-buttons>
+		</ion-item>
+		<ion-item-options side="end">
+			<ng-container *ngIf="user.isAdmin">
+				<ion-item-option color="success" (click)="onEditOptionClick()">
+					<ion-buttons>
+						<ion-button>
+							<ion-icon slot="icon-only" name="pencil"></ion-icon>
+						</ion-button>
+					</ion-buttons>
+				</ion-item-option>
+			</ng-container>
+		</ion-item-options>
+	</ion-item-sliding>
+</ion-card>

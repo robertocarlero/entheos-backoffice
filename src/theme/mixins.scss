@@ -1,0 +1,62 @@
+@mixin flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin square($size) {
+	width: $size;
+	height: $size;
+}
+
+@mixin square-fixed($size) {
+	@include square($size);
+	min-width: $size;
+	min-height: $size;
+}
+
+@mixin background($color) {
+	background: $color;
+	background-color: $color;
+	--background: $color;
+	--background-color: $color;
+}
+
+@mixin gradient($gradient, $color) {
+	@include background($color);
+	@include background($gradient);
+}
+
+@mixin set-size($property, $value, $size) {
+	&-#{$size} {
+		#{$property}: $value !important;
+	}
+	&t-#{$size} {
+		#{$property}-top: $value !important;
+	}
+	&r-#{$size} {
+		#{$property}-right: $value !important;
+	}
+	&b-#{$size} {
+		#{$property}-bottom: $value !important;
+	}
+	&l-#{$size} {
+		#{$property}-left: $value !important;
+	}
+	&x-#{$size} {
+		#{$property}-right: $value !important;
+		#{$property}-left: $value !important;
+	}
+	&y-#{$size} {
+		#{$property}-top: $value !important;
+		#{$property}-bottom: $value !important;
+	}
+}
+
+@mixin set-values($property, $values) {
+	@each $value in $values {
+		&-#{$value} {
+			#{$property}: $value !important;
+		}
+	}
+}

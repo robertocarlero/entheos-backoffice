@@ -1,0 +1,151 @@
+<div class="w-100 h-100 p-3 d-flex flex-column align-items-center">
+	<form class="w-100 pb-5" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>First name</mat-label>
+			<mat-icon matPrefix>person</mat-icon>
+			<input
+				autofocus
+				matInput
+				required
+				formControlName="firstname"
+				placeholder="Ex. Jhon Daniel"
+				inputType="alphabetic"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="b?.focus()"
+			/>
+			<mat-error *ngIf="form.get('firstname')?.invalid">
+				<app-errors [errors]="form.get('firstname')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Last name</mat-label>
+			<mat-icon matPrefix>person</mat-icon>
+			<input
+				#b
+				matInput
+				required
+				formControlName="lastname"
+				placeholder="Ex. Doe Brown"
+				inputType="alphabetic"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="c?.focus()"
+			/>
+			<mat-error *ngIf="form.get('lasname')?.invalid">
+				<app-errors [errors]="form.get('lastname')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Email</mat-label>
+			<mat-icon matPrefix>alternate_email</mat-icon>
+			<input
+				#c
+				matInput
+				required
+				formControlName="email"
+				placeholder="Ex. jhondoe@mail.com"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="d?.focus()"
+			/>
+			<mat-error *ngIf="form.get('email')?.invalid">
+				<app-errors [errors]="form.get('email')?.errors"> </app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>DNI</mat-label>
+			<mat-icon matPrefix>badge</mat-icon>
+			<input
+				#d
+				matInput
+				required
+				type="text"
+				formControlName="dni"
+				placeholder="Ex. V-60213410"
+				inputType="dni"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="e?.open(); e?.focus()"
+			/>
+			<mat-error *ngIf="form.get('dni')?.invalid">
+				<app-errors [errors]="form.get('dni')?.errors"> </app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Occupation</mat-label>
+			<mat-icon matPrefix>engineering</mat-icon>
+			<mat-select
+				#e
+				required
+				formControlName="occupation"
+				[errorStateMatcher]="matcher"
+				(selectionChange)="f?.open(); f?.focus()"
+			>
+				<mat-option value="technician">Technician</mat-option>
+				<mat-option value="padawan">Padawan</mat-option>
+				<mat-option value="seller">Seller</mat-option>
+				<mat-option value="administrative">Administrative</mat-option>
+			</mat-select>
+			<mat-error *ngIf="form.get('occupation')?.invalid">
+				<app-errors [errors]="form.get('occupation')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Role</mat-label>
+			<mat-icon matPrefix>manage_accounts</mat-icon>
+			<mat-select
+				#f
+				required
+				formControlName="role"
+				[errorStateMatcher]="matcher"
+				(selectionChange)="g?.focus()"
+			>
+				<mat-option *ngFor="let role of roles" [value]="role">
+					{{ role | titlecase }}
+				</mat-option>
+			</mat-select>
+			<mat-error *ngIf="form.get('role')?.invalid">
+				<app-errors [errors]="form.get('role')?.errors"> </app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Start date</mat-label>
+			<mat-icon matPrefix>today</mat-icon>
+			<input
+				#g
+				matInput
+				required
+				formControlName="start_date"
+				[matDatepicker]="datepicker"
+				[errorStateMatcher]="matcher"
+				(focus)="datepicker?.open()"
+				(dateChange)="h?.open(); h?.focus()"
+			/>
+			<mat-datepicker #datepicker></mat-datepicker>
+			<mat-error *ngIf="form.get('start_date')?.invalid">
+				<app-errors [errors]="form.get('start_date')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Status</mat-label>
+			<mat-icon matPrefix>person_off</mat-icon>
+			<mat-select
+				#h
+				required
+				formControlName="active"
+				[value]="false"
+				[errorStateMatcher]="matcher"
+			>
+				<mat-option [value]="true">Active</mat-option>
+				<mat-option [value]="false">Inactive</mat-option>
+			</mat-select>
+			<mat-error *ngIf="form.get('active')?.invalid">
+				<app-errors [errors]="form.get('active')?.errors"> </app-errors>
+			</mat-error>
+		</mat-form-field>
+	</form>
+</div>
+<div class="float-button">
+	<app-save-button (click)="onSaveButtonClick()" size="big"></app-save-button>
+</div>

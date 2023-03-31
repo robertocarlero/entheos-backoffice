@@ -1,0 +1,24 @@
+<div id="container" class="w-100">
+	<app-small-button
+		(click)="onSmsButtonClick()"
+		[color]="
+			data?.phoneNumber && this.platform === 'android'
+				? 'primary'
+				: 'secondary'
+		"
+		size="large"
+		icon="chatbubble-ellipses"
+	></app-small-button>
+	<app-small-button
+		(click)="onWhatsappButtonClick()"
+		[color]="data?.whatsappNumber ? 'primary' : 'secondary'"
+		size="large"
+		icon="logo-whatsapp"
+	></app-small-button>
+	<app-small-button
+		(click)="onCallButtonClick()"
+		[color]="data?.phoneNumber ? 'primary' : 'secondary'"
+		size="large"
+		icon="call"
+	></app-small-button>
+</div>

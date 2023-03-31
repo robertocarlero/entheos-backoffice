@@ -1,0 +1,7 @@
+<app-devices-list
+	*ngIf="devices_list"
+	class="w-100 h-100"
+	[data]="devices_list"
+	[add]="false"
+	(output)="onDevicesListOutput($event)"
+></app-devices-list>

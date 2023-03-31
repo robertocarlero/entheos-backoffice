@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar color="light" class="px-2">
+		<ion-back-button slot="start">
+			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+		</ion-back-button>
+		<ion-menu-button slot="end"></ion-menu-button>
+	</ion-toolbar>
+</ion-header>
+<ion-content color="light">
+	<div class="content mx-auto app-max-width w-100 h-100">
+		<div class="p-3">
+			<ion-card
+				class="header w-100 d-flex shadow-sm align-items-center m-0"
+			>
+				<div class="content p-3 py-4">
+					<ion-card-title mode="md" class="font-weight-bold">
+						Hello {{name}}
+					</ion-card-title>
+					<p class="mt-2">
+						“Nunca dudes que un pequeño grupo de personas
+						comprometidas pueda cambiar el mundo. De hecho, es lo
+						único que lo ha logrado”
+					</p>
+				</div>
+				<figure class="asset">
+					<img src="assets/img/team-goals-amico.svg" alt="" />
+				</figure>
+			</ion-card>
+		</div>
+		<app-members-list
+			[data]="users.all"
+			(output)="onMembersListOutput($event)"
+		></app-members-list>
+	</div>
+</ion-content>

@@ -1,0 +1,63 @@
+<section
+	class="container w-100 position-relative d-flex justify-content-center"
+>
+	<div class="banner w-100 d-flex justify-content-end position-absolute">
+		<img
+			class="position-absolute"
+			[src]="banner || 'assets/img/diseno-conexion-malla.jpeg'"
+		/>
+		<ion-button
+			inputImage
+			(outputImage)="onBannerOutputImage($event)"
+			color="primary"
+			fill="clear"
+			class="m-3"
+		>
+			<ion-icon slot="start" name="camera"></ion-icon>
+			Edit banner
+		</ion-button>
+	</div>
+	<div
+		class="
+			avatar
+			d-flex
+			justify-content-end
+			align-items-end
+			position-absolute
+		"
+	>
+		<div
+			class="
+				img
+				w-100
+				h-100
+				rounded-circle
+				overflow-hidden
+				position-absolute
+			"
+		>
+			<img [src]="avatar || 'assets/img/user-unknown.png'" />
+		</div>
+		<app-image-button
+			size="big"
+			(output)="onAvatarOutputImage($event)"
+		></app-image-button>
+	</div>
+	<div
+		class="
+			title
+			w-100
+			d-flex
+			flex-column
+			align-items-center
+			position-absolute
+		"
+	>
+		<ion-label class="font-medium">{{
+			user?.profile?.name | titlecase
+		}}</ion-label>
+		<ion-label color="medium">{{
+			user?.profile?.email | lowercase
+		}}</ion-label>
+	</div>
+</section>

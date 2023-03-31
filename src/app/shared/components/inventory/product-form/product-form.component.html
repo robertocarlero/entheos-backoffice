@@ -1,0 +1,88 @@
+<div class="w-100 p-3 overflow-visible d-flex flex-column align-items-center">
+	<div class="image r-5 my-4 shadow-sm overflow-hidden">
+		<app-input-image
+			[src]="img_url"
+			(output)="onInputImageOutput($event)"
+		></app-input-image>
+	</div>
+	<form class="w-100" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Name</mat-label>
+			<mat-icon matPrefix>receipt_long</mat-icon>
+			<input
+				autofocus
+				matInput
+				required
+				formControlName="name"
+				placeholder="Ex. Smartwatch T-500"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="b?.focus()"
+			/>
+			<mat-error *ngIf="form?.get('name')?.invalid">
+				<app-errors [errors]="form?.get('name')?.errors"></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<fieldset formGroupName="price">
+			<mat-form-field class="w-100" appearance="outline">
+				<mat-label>Price</mat-label>
+				<mat-icon matPrefix>attach_money</mat-icon>
+				<input
+					#b
+					matInput
+					required
+					inputmode="numeric"
+					formControlName="value"
+					placeholder="Ex. 12$"
+					min="0.01"
+					type="number"
+					[errorStateMatcher]="matcher"
+					(keyup.enter)="c?.focus(); c?.open()"
+				/>
+				<mat-error *ngIf="form?.get('price')?.get('value')?.invalid">
+					<app-errors
+						[errors]="form?.get('price')?.get('value')?.errors"
+					>
+					</app-errors>
+				</mat-error>
+			</mat-form-field>
+		</fieldset>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Stock</mat-label>
+			<mat-icon matPrefix>format_list_numbered</mat-icon>
+			<input
+				#c
+				matInput
+				required
+				inputmode="numeric"
+				formControlName="stock"
+				placeholder="Ex. 1100"
+				type="number"
+				min="0"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="d?.focus()"
+			/>
+			<mat-error *ngIf="form?.get('stock')?.invalid">
+				<app-errors [errors]="form?.get('stock')?.errors"> </app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Description</mat-label>
+			<textarea
+				#d
+				matInput
+				required
+				formControlName="description"
+				placeholder="High and low heart rate notifications irregular heart rhythm notification..."
+				[errorStateMatcher]="matcher"
+			></textarea>
+			<mat-error *ngIf="form?.get('description')?.invalid">
+				<app-errors
+					[errors]="form?.get('description')?.errors"
+				></app-errors>
+			</mat-error>
+		</mat-form-field>
+	</form>
+</div>
+<div class="float-button">
+	<app-save-button (click)="onSaveButtonClick()" size="big"></app-save-button>
+</div>

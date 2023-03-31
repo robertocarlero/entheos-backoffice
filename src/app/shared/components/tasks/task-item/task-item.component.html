@@ -1,0 +1,62 @@
+<div id="container" class="d-flex w-100">
+	<div class="left">
+		<ion-avatar
+			color="dark"
+			class="
+				avatar
+				d-flex
+				flex-column
+				justify-content-center
+				align-items-center
+				shadow-sm
+			"
+		>
+			<small>{{ data?.schedule?.toDate() | date: 'dd' }}</small>
+			<small>
+				{{ data?.schedule?.toDate() | date: 'MMM' | uppercase }}
+			</small>
+		</ion-avatar>
+	</div>
+	<div class="right d-flex flex-column ml-2">
+		<div class="d-flex">
+			<div
+				class="
+					color-item
+					mx-3
+					d-flex
+					justify-content-center
+					align-items-center
+				"
+				[ngStyle]="{ backgroundColor: data?.color || 'black' }"
+			>
+				<ion-icon color="light" name="time-outline"></ion-icon>
+			</div>
+			<p class="font-standard mb-0">
+				{{ data?.schedule?.toDate() | date: 'hh:mm a' }}
+			</p>
+			<p class="font-standard mb-0 text-secondary ml-2">
+				{{ data?.schedule?.toDate() | date: 'EEEE' }}
+			</p>
+		</div>
+		<ion-item
+			button
+			class="content m-0 shadow-sm"
+			lines="none"
+			(click)="onClick()"
+		>
+			<ion-label class="ml-3 my-4">
+				{{ data?.title }}
+				<p class="m-0 text-secondary">{{ data?.description }}</p>
+			</ion-label>
+			<ion-checkbox
+				#checkbox
+				slot="end"
+				mode="ios"
+				color="success"
+				[checked]="data?.completed"
+				(click)="onCheckboxInputClick($event)"
+			></ion-checkbox>
+			<ion-checkbox hidden></ion-checkbox>
+		</ion-item>
+	</div>
+</div>

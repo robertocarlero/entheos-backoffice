@@ -1,0 +1,23 @@
+.content {
+	border-radius: 20px;
+	overflow: auto;
+	header {
+		.avatar {
+			width: 200px;
+			height: 200px;
+			border: solid 10px var(--ion-color-light);
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.content {
+		.header {
+			.avatar {
+				width: 150px;
+				height: 150px;
+				border: solid 8px var(--ion-color-light);
+			}
+		}
+	}
+}

@@ -1,0 +1,11 @@
+<app-modal-header
+	title="{{ data ? 'Edit' : 'Create' }} Member"
+	(close)="onCloseButtonClick()"
+></app-modal-header>
+
+<ion-content color="light">
+	<app-member-form
+		[data]="data"
+		(output)="onFormOutput($event)"
+	></app-member-form>
+</ion-content>

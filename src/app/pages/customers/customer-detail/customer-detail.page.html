@@ -1,0 +1,66 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar color="light" class="px-2">
+		<ion-back-button slot="start" defaultHref="customers"></ion-back-button>
+		<ion-menu-button slot="end"></ion-menu-button>
+	</ion-toolbar>
+</ion-header>
+<ion-content color="light" *ngIf="data">
+	<section class="d-none content w-100 h-100 p-3 d-md-flex">
+		<div class="shadow user h-100 mr-3">
+			<app-user-info class="w-100 h-100" [data]="data"></app-user-info>
+		</div>
+		<div class="w-100 d-flex flex-column flex-xl-row">
+			<section class="shadow devices w-100 h-100 mr-3 mb-3">
+				<ion-content>
+					<app-devices-list
+						*ngIf="devices"
+						class="w-100 h-100"
+						[color]="null"
+						[data]="devices"
+						[customer]="data?.id"
+						(output)="onDevicesListOutput($event)"
+					></app-devices-list>
+				</ion-content>
+			</section>
+			<section class="shadow tasks w-100 h-100">
+				<ion-content>
+					<app-tasks-list
+						*ngIf="tasks"
+						class="w-100 h-100"
+						[data]="tasks"
+						(output)="onOneTasksListOutput($event)"
+						[customer]="data?.id"
+					></app-tasks-list>
+				</ion-content>
+			</section>
+		</div>
+	</section>
+	<ion-slides class="d-md-none w-100 h-100" pager="true">
+		<ion-slide class="w-100 h-100 p-3">
+			<app-user-info class="w-100 h-100" [data]="data"></app-user-info>
+		</ion-slide>
+		<ion-slide class="w-100 h-100 devices">
+			<ion-content color="light">
+				<app-devices-list
+					*ngIf="devices"
+					class="w-100 h-100"
+					color="light"
+					[data]="devices"
+					[customer]="data?.id"
+					(output)="onDevicesListOutput($event)"
+				></app-devices-list>
+			</ion-content>
+		</ion-slide>
+		<ion-slide class="w-100 h-100 tasks">
+			<ion-content color="light">
+				<app-tasks-list
+					*ngIf="tasks"
+					class="w-100 h-100"
+					[data]="tasks"
+					(output)="onOneTasksListOutput($event)"
+					[customer]="data?.id"
+				></app-tasks-list>
+			</ion-content>
+		</ion-slide>
+	</ion-slides>
+</ion-content>

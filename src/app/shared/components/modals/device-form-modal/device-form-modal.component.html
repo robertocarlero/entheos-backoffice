@@ -1,0 +1,12 @@
+<app-modal-header
+	title="{{ data ? 'Edit' : 'Create' }} Device"
+	(close)="onCloseButtonClick()"
+></app-modal-header>
+
+<ion-content color="light">
+	<app-device-form
+		[data]="data"
+		[customer]="customer"
+		(output)="onFormOutput($event)"
+	></app-device-form>
+</ion-content>

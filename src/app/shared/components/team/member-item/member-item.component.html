@@ -1,0 +1,64 @@
+<ion-card id="container" class="m-0 shadow-sm" color="dark">
+	<ion-toolbar class="px-3" color="dark">
+		<ion-label>
+			{{ data?.occupation | titlecase }}
+		</ion-label>
+		<ion-text slot="end" [color]="data?.active ? 'success' : 'danger'">
+			<small>
+				{{ data?.active ? 'Active' : 'Inactive' }}
+			</small>
+		</ion-text>
+	</ion-toolbar>
+	<ion-item-sliding #item class="mb-3" [disabled]="!user.isAdmin">
+		<ion-item
+			color="dark"
+			mode="md"
+			class="ion-no-border"
+			lines="none"
+			button
+			(click)="onClick()"
+		>
+			<app-avatar
+				class="avatar mr-2"
+				[src]="image"
+				[alt]="data?.name"
+			></app-avatar>
+			<ion-label
+				>{{ data?.name }}
+				<p class="m-0 text-secondary">
+					{{ data?.member_id | customId }}
+				</p>
+			</ion-label>
+			<ion-buttons slot="end">
+				<ion-button
+					color="medium"
+					(click)="onOptionsButtonClick($event)"
+					*ngIf="user.isAdmin"
+				>
+					<ion-icon
+						slot="icon-only"
+						name="ellipsis-vertical"
+					></ion-icon>
+				</ion-button>
+			</ion-buttons>
+		</ion-item>
+		<ion-item-options side="end">
+			<ng-container *ngIf="user.isAdmin">
+				<ion-item-option (click)="onEraseOptionClick()" color="danger">
+					<ion-buttons>
+						<ion-button>
+							<ion-icon slot="icon-only" name="trash"></ion-icon>
+						</ion-button>
+					</ion-buttons>
+				</ion-item-option>
+				<ion-item-option color="success" (click)="onEditOptionClick()">
+					<ion-buttons>
+						<ion-button color="light">
+							<ion-icon slot="icon-only" name="pencil"></ion-icon>
+						</ion-button>
+					</ion-buttons>
+				</ion-item-option>
+			</ng-container>
+		</ion-item-options>
+	</ion-item-sliding>
+</ion-card>

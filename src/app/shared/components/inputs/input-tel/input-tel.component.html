@@ -1,0 +1,39 @@
+<div class="button" matRipple (click)="onCopyButtonClick()">
+	<mat-icon>content_copy</mat-icon>
+</div>
+<div role="group" class="tel-input-container" [formGroup]="parts">
+	<input
+		#area
+		size="3"
+		maxLength="3"
+		inputmode="numeric"
+		inputType="numeric"
+		formControlName="area"
+		class="tel-input-element"
+		(keyup)="_handleInput(parts.controls.area, exchange)"
+	/>
+	<span class="tel-input-spacer">&ndash;</span>
+	<input
+		#exchange
+		size="3"
+		maxLength="3"
+		inputmode="numeric"
+		inputType="numeric"
+		formControlName="exchange"
+		class="tel-input-element"
+		(keyup)="_handleInput(parts.controls.exchange, subscriber)"
+		(keyup.backspace)="autoFocusPrev(parts.controls.exchange, area)"
+	/>
+	<span class="tel-input-spacer">&ndash;</span>
+	<input
+		#subscriber
+		size="4"
+		maxLength="4"
+		inputmode="numeric"
+		inputType="numeric"
+		formControlName="subscriber"
+		class="tel-input-element"
+		(keyup)="_handleInput(parts.controls.subscriber)"
+		(keyup.backspace)="autoFocusPrev(parts.controls.subscriber, exchange)"
+	/>
+</div>

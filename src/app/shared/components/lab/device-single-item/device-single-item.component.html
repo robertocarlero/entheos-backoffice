@@ -1,0 +1,24 @@
+<ion-item
+	mode="md"
+	color="light"
+	class="ion-no-border"
+	[button]="button"
+	[detail]="detail"
+	[disabled]="disabled"
+	[lines]="line ? 'line' : 'none'"
+>
+	<app-avatar
+		class="avatar mr-2"
+		[src]="image"
+		[alt]="data?.brand"
+	></app-avatar>
+	<ion-label>
+		{{ data?.brand }} {{ data?.model }}
+		<p class="m-0 text-secondary">{{ data?.serial }}</p>
+	</ion-label>
+	<ion-buttons *ngIf="!!customIcon && !detail" slot="end">
+		<ion-button (click)="onCustomButtonClick($event)">
+			<ion-icon slot="icon-only" [name]="customIcon"></ion-icon>
+		</ion-button>
+	</ion-buttons>
+</ion-item>

@@ -1,0 +1,73 @@
+<div class="w-100 p-3 overflow-visible d-flex flex-column align-items-center">
+	<form class="w-100" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+		<ion-input
+			autofocus
+			matInput
+			required
+			autofocus
+			class="font-medium"
+			formControlName="title"
+			(keyup.enter)="b?.setFocus()"
+			placeholder="Title"
+		></ion-input>
+		<ion-textarea
+			#b
+			matInput
+			formControlName="description"
+			placeholder="Write any description or details to remember..."
+			rows="5"
+		></ion-textarea>
+		<app-input-user
+			*ngIf="user?.isAdmin"
+			[line]="true"
+			[detail]="true"
+			[list]="users.active"
+			formControlName="member_id"
+		></app-input-user>
+		<app-input-user
+			[line]="true"
+			[detail]="true"
+			[list]="customers.all"
+			[disabled]="!!customer"
+			title="Customer"
+			formControlName="customer_id"
+		></app-input-user>
+		<app-input-device
+			*ngIf="devices_list"
+			[line]="true"
+			[detail]="true"
+			[list]="devices_list"
+			[disabled]="!!device"
+			title="Device"
+			formControlName="device_id"
+		></app-input-device>
+		<ion-item color="light" class="ml-3">
+			<ion-label>Date</ion-label>
+			<ion-datetime
+				displayFormat="DDDD MMM D, YYYY HH:mm"
+				[min]="today?.getFullYear()"
+				[max]="today?.getFullYear() + 5"
+				formControlName="schedule"
+			></ion-datetime>
+		</ion-item>
+		<ion-item color="light" lines="none">
+			<ion-label>
+				Remember me
+				<p class="text-secondary">
+					You will receive a notification on the selected date
+				</p>
+			</ion-label>
+			<ion-toggle
+				color="success"
+				mode="ios"
+				formControlName="notify"
+			></ion-toggle>
+		</ion-item>
+		<ion-item color="light" lines="none">
+			<app-input-color formControlName="color"></app-input-color>
+		</ion-item>
+	</form>
+</div>
+<div class="float-button">
+	<app-save-button (click)="onSaveButtonClick()" size="big"></app-save-button>
+</div>

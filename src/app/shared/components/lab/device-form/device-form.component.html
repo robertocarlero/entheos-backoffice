@@ -1,0 +1,148 @@
+<div class="w-100 p-3 overflow-visible d-flex flex-column align-items-center">
+	<div class="image r-5 my-4 shadow-sm overflow-hidden">
+		<app-input-image
+			[src]="img_url"
+			(output)="onInputImageOutput($event)"
+		></app-input-image>
+	</div>
+	<form class="w-100" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Code (Control)</mat-label>
+			<mat-icon matPrefix>receipt_long</mat-icon>
+			<input
+				matInput
+				required
+				formControlName="code"
+				placeholder="Ex. 1000420"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="a?.focus()"
+			/>
+			<mat-error *ngIf="form.get('code')?.invalid">
+				<app-errors [errors]="form.get('code')?.errors"></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Serial</mat-label>
+			<mat-icon matPrefix>pin</mat-icon>
+			<input
+				#a
+				matInput
+				required
+				formControlName="serial"
+				placeholder="Ex. GJASF-02953824134"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="b?.focus()"
+			/>
+			<mat-error *ngIf="form.get('serial')?.invalid">
+				<app-errors [errors]="form.get('serial')?.errors"></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Brand</mat-label>
+			<mat-icon matPrefix>branding_watermark</mat-icon>
+			<input
+				#b
+				autofocus
+				matInput
+				required
+				formControlName="brand"
+				placeholder="Ex. Samsung"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="c?.focus()"
+			/>
+			<mat-error *ngIf="form.get('brand')?.invalid">
+				<app-errors [errors]="form.get('brand')?.errors"></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Model</mat-label>
+			<mat-icon matPrefix>aod</mat-icon>
+			<input
+				#c
+				matInput
+				required
+				formControlName="model"
+				placeholder="Ex. SGH-I337M"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="d?.open(); d?.focus()"
+			/>
+			<mat-error *ngIf="form.get('model')?.invalid">
+				<app-errors [errors]="form.get('model')?.errors"></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Type</mat-label>
+			<mat-icon matPrefix>devices_other</mat-icon>
+			<mat-select
+				#d
+				matInput
+				required
+				formControlName="type"
+				[errorStateMatcher]="matcher"
+			>
+				<mat-option value="desktop">Desktop</mat-option>
+				<mat-option value="laptop">Laptop</mat-option>
+				<mat-option value="tablet">Tablet</mat-option>
+				<mat-option value="phone">Phone</mat-option>
+				<mat-option value="other">Other</mat-option>
+			</mat-select>
+			<mat-error *ngIf="form.get('type')?.invalid">
+				<app-errors [errors]="form.get('type')?.errors"></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Color</mat-label>
+			<mat-icon matPrefix>palette</mat-icon>
+			<input
+				matInput
+				required
+				type="color"
+				formControlName="color"
+				[errorStateMatcher]="matcher"
+				(change)="e?.focus()"
+			/>
+			<mat-error *ngIf="form.get('color')?.invalid">
+				<app-errors [errors]="form.get('color')?.errors"></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Description</mat-label>
+			<textarea
+				#e
+				matInput
+				required
+				formControlName="description"
+				placeholder="The phone does not connect to the internet..."
+				[errorStateMatcher]="matcher"
+			></textarea>
+			<mat-error *ngIf="form.get('description')?.invalid">
+				<app-errors
+					[errors]="form.get('description')?.errors"
+				></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Details</mat-label>
+			<textarea
+				matInput
+				formControlName="details"
+				placeholder="Ex. Split screen and worn edge..."
+				[errorStateMatcher]="matcher"
+			></textarea>
+			<mat-error *ngIf="form.get('details')?.invalid">
+				<app-errors [errors]="form.get('details')?.errors"></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<app-input-user
+			[line]="true"
+			[detail]="true"
+			[disabled]="!!customer"
+			[list]="customers.all"
+			title="Customer"
+			formControlName="customer_id"
+		></app-input-user>
+	</form>
+</div>
+<div class="float-button">
+	<app-save-button (click)="onSaveButtonClick()" size="big"></app-save-button>
+</div>

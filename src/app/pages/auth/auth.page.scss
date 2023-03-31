@@ -1,0 +1,22 @@
+.content {
+	display: flex;
+	section {
+		@media (max-width: 992px) {
+			width: 100vw;
+		}
+		width: 50vw;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		&.asset {
+			background: #201e1e;
+		}
+	}
+}
+
+@media (max-width: 992px) {
+	.modules {
+		width: 100vw;
+	}
+}

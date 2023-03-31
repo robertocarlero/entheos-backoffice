@@ -1,0 +1,25 @@
+<ion-item
+	color="light"
+	detail
+	[disabled]="disabled"
+	button
+	*ngIf="!device_id"
+	(click)="onSetUserButtonClick()"
+>
+	<app-avatar class="avatar mr-2"></app-avatar>
+	<ion-label>
+		{{ title | titlecase }}
+		<p class="text-secondary">Click to select a {{ title | lowercase }}</p>
+	</ion-label>
+</ion-item>
+<app-device-single-item-watcher
+	*ngIf="device_id"
+	[id]="device_id"
+	[line]="line"
+	[button]="button"
+	[detail]="detail"
+	[disabled]="disabled"
+	(click)="onSetUserButtonClick()"
+	customIcon="close-circle"
+	(custom)="onCustomActionEmit()"
+></app-device-single-item-watcher>

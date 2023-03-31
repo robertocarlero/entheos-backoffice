@@ -1,0 +1,110 @@
+<section class="w-100 h-100 p-3 pb-5">
+	<ion-item color="light" lines="none">
+		<ion-text class="title">{{ data?.title }}</ion-text>
+	</ion-item>
+	<ion-item
+		color="light"
+		detail
+		button
+		(click)="onMemberItemClick()"
+		[disabled]="!user.isAdmin"
+	>
+		<app-user-avatar class="avatar mr-2" [data]="member"></app-user-avatar>
+		<ion-label>
+			<span class="text-secondary">Member</span>
+			<p>{{ member?.name }}</p>
+		</ion-label>
+	</ion-item>
+	<ion-item
+		color="light"
+		detail
+		button
+		*ngIf="customer"
+		(click)="onCustomerItemClick()"
+	>
+		<app-user-avatar
+			class="avatar mr-2"
+			[data]="customer"
+		></app-user-avatar>
+		<ion-label>
+			<span class="text-secondary">Customer</span>
+			<p>{{ customer?.name }}</p>
+		</ion-label>
+	</ion-item>
+	<ion-item
+		color="light"
+		detail
+		button
+		*ngIf="device"
+		(click)="onDeviceItemClick()"
+	>
+		<app-avatar
+			class="avatar mr-2"
+			[alt]="device?.brand"
+			[src]="device?.image?.url_thumb || device?.image?.url"
+		></app-avatar>
+		<ion-label>
+			<span class="text-secondary">Device</span>
+			<p>{{ device?.brand }} {{ device?.model }}</p>
+		</ion-label>
+	</ion-item>
+	<ion-item color="light">
+		<ion-icon name="calendar-outline" slot="start"></ion-icon>
+		<ion-label>
+			<span class="text-secondary">Date</span>
+			<p>{{ data?.schedule?.toDate() | date: 'MMM dd, y - hh:mm a' }}</p>
+		</ion-label>
+	</ion-item>
+	<ion-item color="light">
+		<ion-icon name="document-text-outline" slot="start"></ion-icon>
+		<ion-text class="my-3">
+			<span class="text-secondary">Description</span><br />
+			<p>{{ data?.description }}</p>
+		</ion-text>
+	</ion-item>
+	<ion-item color="light">
+		<ion-icon
+			name="checkmark-done-circle-outline"
+			slot="start"
+			lines="none"
+		></ion-icon>
+		<ion-label>
+			<span class="text-secondary">Status</span><br />
+			<p>{{ data?.completed ? 'Completed' : 'Pending' }}</p>
+		</ion-label>
+		<ion-toggle
+			#toggle
+			slot="end"
+			mode="ios"
+			color="success"
+			[checked]="data?.completed"
+			(click)="onToggleInputClick($event)"
+		></ion-toggle>
+	</ion-item>
+	<div class="w-100 p-3 pt-4 mb-5">
+		<div
+			class="rounded-pill w-100 p-2 mx-3"
+			[ngStyle]="{ backgroundColor: data?.color || 'black' }"
+		></div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+</section>
+<div class="float-button d-flex flex-column">
+	<app-small-button
+		(click)="onDeleteButtonClick()"
+		size="big"
+		icon="trash"
+		color="secondary"
+		class="mb-2"
+		*ngIf="user?.isAdmin || is_own"
+	></app-small-button>
+	<app-small-button
+		(click)="onEditButtonClick()"
+		size="big"
+		icon="pencil"
+		*ngIf="user?.isEditor || user?.isAdmin || is_own"
+	></app-small-button>
+</div>

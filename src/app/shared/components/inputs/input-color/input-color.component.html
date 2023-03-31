@@ -1,0 +1,51 @@
+<ion-card
+	id="container"
+	class="d-flex m-0 p-0 shadow-none"
+	[disabled]="disabled"
+>
+	<ng-container *ngFor="let color of colors">
+		<div
+			[class.shadow]="color === selected"
+			[ngStyle]="{ backgroundColor: color }"
+			class="
+				item
+				rounded-circle
+				overflow-hidden
+				d-flex
+				justify-content-center
+				align-items-center
+				mx-1
+				mt-2
+			"
+			mat-ripple
+			(click)="onOneItemClick(color)"
+		>
+			<ion-icon color="light" *ngIf="color === selected" name="checkmark">
+			</ion-icon>
+		</div>
+	</ng-container>
+	<div
+		[ngStyle]="{ backgroundColor: custom }"
+		*ngIf="custom"
+		class="
+			item
+			shadow
+			rounded-circle
+			overflow-hidden
+			d-flex
+			justify-content-center
+			align-items-center
+			mx-1
+			mt-2
+		"
+		mat-ripple
+	>
+		<ion-icon color="light" name="checkmark"> </ion-icon>
+	</div>
+	<ion-buttons>
+		<ion-button color="primary" (click)="input.click()">
+			<ion-icon slot="icon-only" name="eyedrop-outline"></ion-icon>
+		</ion-button>
+	</ion-buttons>
+	<input type="color" #input [formControl]="control" />
+</ion-card>

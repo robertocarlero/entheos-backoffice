@@ -1,0 +1,36 @@
+<ion-content>
+	<div class="content">
+		<section class="asset d-none d-lg-flex">
+			<app-logo class="w-75" style="max-width: 300px"></app-logo>
+		</section>
+		<section class="modules">
+			<div
+				class="w-100 d-flex flex-column p-md-5 p-3"
+				style="max-width: 450px"
+				[ngSwitch]="section"
+			>
+				<app-appicon class="w-50 mx-auto"></app-appicon>
+				<ng-container *ngSwitchCase="'login'">
+					<app-login></app-login>
+					<ion-label
+						(click)="section = 'recover'"
+						color="secondary"
+						class="mx-auto mt-2 btn"
+						>Forgot password?</ion-label
+					>
+				</ng-container>
+				<ng-container *ngSwitchCase="'recover'">
+					<app-recover-password
+						(sent)="section = 'login'"
+					></app-recover-password>
+					<ion-label
+						(click)="section = 'login'"
+						color="secondary"
+						class="mx-auto mt-2 btn"
+						>Sign In?</ion-label
+					>
+				</ng-container>
+			</div>
+		</section>
+	</div>
+</ion-content>

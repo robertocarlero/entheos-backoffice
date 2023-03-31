@@ -1,0 +1,78 @@
+<section class="w-100 h-100 p-3 pb-5">
+	<ion-item color="light" lines="none">
+		<ion-text class="w-100 title d-flex justify-content-between mb-3">
+			<span>{{ data?.type | titlecase }}:</span>
+			<span>{{ data?.amount?.value }} {{ data?.amount?.coin }} </span>
+		</ion-text>
+	</ion-item>
+	<ion-item color="light" *ngIf="data?.description">
+		<ion-icon name="document-text-outline" slot="start"></ion-icon>
+		<ion-text class="my-3">
+			<span class="text-secondary">Description</span><br />
+			<p>{{ data?.description }}</p>
+		</ion-text>
+	</ion-item>
+	<ion-item color="light">
+		<ion-icon name="calendar-outline" slot="start"></ion-icon>
+		<ion-label>
+			<span class="text-secondary">Date</span>
+			<p>{{ data?.date?.toDate() | date: 'MMM dd, y - hh:mm a' }}</p>
+		</ion-label>
+	</ion-item>
+	<ion-item
+		color="light"
+		detail
+		button
+		*ngIf="customer"
+		(click)="onCustomerItemClick()"
+	>
+		<app-user-avatar
+			class="avatar mr-2"
+			[data]="customer"
+		></app-user-avatar>
+		<ion-label>
+			<span class="text-secondary">Customer</span>
+			<p>{{ customer?.name }}</p>
+		</ion-label>
+	</ion-item>
+	<ion-item
+		color="light"
+		detail
+		button
+		*ngIf="device"
+		(click)="onDeviceItemClick()"
+	>
+		<app-avatar
+			class="avatar mr-2"
+			[alt]="device?.brand"
+			[src]="device?.image?.url_thumb || device?.image?.url"
+		></app-avatar>
+		<ion-label>
+			<span class="text-secondary">Device</span>
+			<p>{{ device?.brand }} {{ device?.model }}</p>
+		</ion-label>
+	</ion-item>
+
+	<div class="w-100 pt-4 mb-5">
+		<div
+			class="rounded-pill w-100 p-2"
+			[ngStyle]="{ backgroundColor: data?.color || 'black' }"
+		></div>
+	</div>
+</section>
+<div class="float-button d-flex">
+	<app-small-button
+		(click)="onDeleteButtonClick()"
+		size="big"
+		icon="trash"
+		color="secondary"
+		class="mr-2"
+		*ngIf="user?.isAdmin"
+	></app-small-button>
+	<app-small-button
+		(click)="onEditButtonClick()"
+		size="big"
+		icon="pencil"
+		*ngIf="user?.isAdmin"
+	></app-small-button>
+</div>

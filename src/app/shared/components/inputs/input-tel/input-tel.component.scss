@@ -1,0 +1,38 @@
+.tel-input-container {
+	display: flex;
+}
+
+.tel-input-element {
+	border: none;
+	background: none;
+	padding: 0;
+	outline: none;
+	font: inherit;
+	text-align: center;
+}
+
+.tel-input-spacer {
+	opacity: 0;
+	transition: opacity 200ms;
+}
+
+:host.floating .tel-input-spacer {
+	opacity: 1;
+}
+
+.button {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	background: none;
+	right: 0px;
+	top: calc(50% - 20px);
+	display: flex;
+	align-items: center;
+	font-size: 6px !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 3px;
+	cursor: pointer;
+}

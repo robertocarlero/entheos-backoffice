@@ -1,0 +1,23 @@
+<ion-item
+	color="light"
+	detail
+	[disabled]="disabled"
+	button
+	*ngIf="!user_id"
+	(click)="onSetUserButtonClick()"
+>
+	<app-avatar class="avatar mr-2"></app-avatar>
+	<ion-label>
+		{{ title | titlecase }}
+		<p class="text-secondary">Click to select a {{ title | lowercase }}</p>
+	</ion-label>
+</ion-item>
+<app-user-item-watcher
+	*ngIf="user_id"
+	[uid]="user_id"
+	[line]="line"
+	[button]="button"
+	[detail]="detail"
+	[disabled]="disabled"
+	(click)="onSetUserButtonClick()"
+></app-user-item-watcher>

@@ -1,0 +1,27 @@
+<div
+	*ngIf="data.url"
+	[style]="'background-image: url(' + data.url + ');'"
+	class="container-image"
+></div>
+<ion-toolbar>
+	<ion-buttons slot="end">
+		<ion-button
+			(click)="onCancelButtonClick()"
+			color="primary"
+			fill="outline"
+			shape="round"
+			slot="end"
+		>
+			Cancel
+		</ion-button>
+		<ion-button
+			(click)="onAcceptButtonClick()"
+			color="primary"
+			fill="solid"
+			shape="round"
+			slot="end"
+		>
+			Confirm
+		</ion-button>
+	</ion-buttons>
+</ion-toolbar>

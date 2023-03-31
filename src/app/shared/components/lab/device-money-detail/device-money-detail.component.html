@@ -1,0 +1,96 @@
+<div class="w-100 p-3 overflow-visible d-flex flex-column align-items-center">
+	<form [formGroup]="totalAmountForm" class="w-100 d-flex">
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Total Amount</mat-label>
+			<mat-icon matPrefix>paid</mat-icon>
+			<input
+				matInput
+				required
+				type="number"
+				formControlName="value"
+				placeholder="Ex. 1000420"
+				[errorStateMatcher]="matcher"
+			/>
+			<mat-error *ngIf="totalAmountForm.get('value')?.invalid">
+				<app-errors
+					[errors]="totalAmountForm.get('value')?.errors"
+				></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<app-save-button
+			[disabled]="!this.user.isAdmin"
+			class="ml-3 mt-2"
+			size="big"
+			(click)="onTotalAmountSaveButtonClick()"
+		></app-save-button>
+	</form>
+	<div class="w-100">
+		<ion-item color="light">
+			<ion-icon name="cash-outline" slot="start"></ion-icon>
+			<ion-label>
+				<span class="text-secondary">Debt</span>
+				<p>{{ debt }} USD</p>
+			</ion-label>
+		</ion-item>
+		<ion-item color="light">
+			<ion-icon name="thumbs-up-outline" slot="start"></ion-icon>
+			<ion-label>
+				<span class="text-secondary">Payed</span>
+				<p>{{ totalPayed }} USD</p>
+			</ion-label>
+		</ion-item>
+		<ion-item color="light">
+			<ion-icon name="thumbs-down-outline" slot="start"></ion-icon>
+			<ion-label>
+				<span class="text-secondary">Spent</span>
+				<p>{{ totalSpent }} USD</p>
+			</ion-label>
+		</ion-item>
+		<ion-card-title mode="md" color="primary" class="m-3">
+			Transactions
+		</ion-card-title>
+		<ion-item
+			*ngFor="let transaction of transactions"
+			mode="md"
+			class="ion-no-border"
+			lines="none"
+			button
+			color="white"
+			(click)="onTransactionClick(transaction)"
+		>
+			<ion-avatar
+				[style.background]="transaction?.color"
+				class="avatar d-flex flex-column justify-content-center align-items-center shadow-sm"
+			>
+				<small>{{ transaction?.date?.toDate() | date: 'dd' }}</small>
+				<small>
+					{{ transaction?.date?.toDate() | date: 'MMM' | uppercase }}
+				</small>
+			</ion-avatar>
+			<ion-label class="ml-2">
+				{{ transaction?.amount?.value }}
+				{{ transaction?.amount?.coin }}
+				<p class="m-0 text-secondary">
+					{{ transaction?.description || '...' }}
+				</p>
+			</ion-label>
+			<div class="d-flex flex-column align-items-end">
+				<small class="text-secondary">
+					{{ transaction?.type | uppercase }}
+				</small>
+				<small>{{ transaction?.code }}</small>
+			</div>
+		</ion-item>
+	</div>
+	<ion-fab
+		*ngIf="this.user.isAdmin"
+		horizontal="end"
+		vertical="bottom"
+		slot="fixed"
+	>
+		<app-add-button
+			(click)="onAddButtonClick()"
+			size="big"
+		></app-add-button>
+	</ion-fab>
+</div>

@@ -1,0 +1,94 @@
+<div class="w-100 h-100 px-3 d-flex flex-column align-items-center">
+	<form class="w-100" [formGroup]="form">
+		<mat-form-field class="w-50 pr-1" appearance="outline">
+			<mat-label>Statuses</mat-label>
+			<mat-icon matPrefix>auto_mode</mat-icon>
+			<mat-chip-list #chipList formControlName="statuses">
+				<mat-chip
+					*ngFor="let item of items"
+					(removed)="onRemoved(item)"
+				>
+					{{ item | titlecase | replace: '-':' ' }}
+					<button matChipRemove>
+						<mat-icon>cancel</mat-icon>
+					</button>
+				</mat-chip>
+				<input
+					autofocus
+					matInput
+					#inputText
+					[errorStateMatcher]="matcher"
+					[formControl]="inputControl"
+					[matAutocomplete]="autocomplete"
+					[matChipInputFor]="chipList"
+					(matChipInputTokenEnd)="onMatChipInputTokenEnd($event)"
+				/>
+			</mat-chip-list>
+			<mat-autocomplete
+				#autocomplete="matAutocomplete"
+				(optionSelected)="onOptionSelected($event)"
+			>
+				<mat-option *ngFor="let item of filteredItems" [value]="item">
+					{{ item | titlecase | replace: '-':' ' }}
+				</mat-option>
+			</mat-autocomplete>
+			<mat-error *ngIf="form.get('statuses')?.invalid">
+				<app-errors [errors]="form.get('statuses')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field class="w-50 pl-1" appearance="outline">
+			<mat-label>Order By</mat-label>
+			<mat-select
+				matInput
+				formControlName="order_by"
+				[errorStateMatcher]="matcher"
+			>
+				<mat-option value="">...</mat-option>
+				<mat-option
+					*ngFor="let date_type of dates_types"
+					[value]="date_type"
+					>{{ date_type | titlecase | replace: '_':' ' }}</mat-option
+				>
+			</mat-select>
+			<mat-error *ngIf="form.get('date_from')?.invalid">
+				<app-errors [errors]="form.get('date_from')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field class="w-50 pr-1" appearance="outline">
+			<mat-label>Date from</mat-label>
+			<mat-icon matPrefix>today</mat-icon>
+			<input
+				matInput
+				formControlName="date_from"
+				[matDatepicker]="datepicker"
+				[errorStateMatcher]="matcher"
+				(focus)="datepicker?.open()"
+			/>
+			<mat-datepicker #datepicker></mat-datepicker>
+			<mat-error *ngIf="form.get('date_from')?.invalid">
+				<app-errors [errors]="form.get('date_from')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-50 pl-1" appearance="outline">
+			<mat-label>Date To</mat-label>
+			<mat-icon matPrefix>event</mat-icon>
+			<input
+				matInput
+				formControlName="date_to"
+				[matDatepicker]="datepicker2"
+				[errorStateMatcher]="matcher"
+				(focus)="datepicker2?.open()"
+			/>
+			<mat-datepicker #datepicker2></mat-datepicker>
+			<mat-error *ngIf="form.get('date_to')?.invalid">
+				<app-errors [errors]="form.get('date_to')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+	</form>
+</div>

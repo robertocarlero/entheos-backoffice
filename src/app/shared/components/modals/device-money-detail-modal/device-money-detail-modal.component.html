@@ -1,0 +1,11 @@
+<app-modal-header
+	title="Money detail"
+	(close)="onCloseButtonClick()"
+></app-modal-header>
+
+<ion-content color="light">
+	<app-device-money-detail
+		[data]="data"
+		(output)="onFormOutput($event)"
+	></app-device-money-detail>
+</ion-content>

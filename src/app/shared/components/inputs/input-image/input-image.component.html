@@ -1,0 +1,12 @@
+<ion-thumbnail
+	[style]="'background-image: url(' + src + ');'"
+	class="image cursor-pointer btn"
+	[class]="size"
+	matRipple
+	inputImage
+	(outputImage)="onOutputImage($event)"
+>
+	<div class="letter">
+		<ion-icon color="light" src="assets/icons/camera-solid.svg"></ion-icon>
+	</div>
+</ion-thumbnail>

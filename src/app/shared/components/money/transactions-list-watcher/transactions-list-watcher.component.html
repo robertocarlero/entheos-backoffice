@@ -1,0 +1,11 @@
+<app-transactions-list
+	*ngIf="transactions_list"
+	class="w-100 h-100"
+	[data]="transactions_list"
+	(output)="onTransactionsListOutput($event)"
+	[add]="add"
+	[color]="color"
+	[fixed]="fixed"
+	[customer]="customer"
+	[device]="device"
+></app-transactions-list>

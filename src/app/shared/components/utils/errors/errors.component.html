@@ -1,0 +1,129 @@
+<ng-container *ngIf="!!errors">
+	<ng-container *ngIf="errors['required']">
+		<span>{{ prefix }} </span>
+	</ng-container>
+	<ng-container *ngIf="!errors['required']">
+		<ng-container *ngIf="errors['pattern']">
+			<ng-container
+				*ngIf="
+					compareRegex(
+						errors['pattern'].requiredPattern,
+						patterns?.password
+					)
+				"
+			>
+				<span>
+					Password must be at least <b>8 characters long</b>,
+				</span>
+				<span>minimum <strong>1 lowercase letter, </strong></span>
+				<span>minimum <strong>1 uppercase letter, </strong></span>
+				<span>y minimum <strong>1 numeric character.</strong></span>
+			</ng-container>
+
+			<ng-container
+				*ngIf="
+					compareRegex(
+						errors['pattern'].requiredPattern,
+						patterns?.number
+					)
+				"
+			>
+				This field only allows numbers
+			</ng-container>
+
+			<ng-container
+				*ngIf="
+					compareRegex(
+						errors['pattern'].requiredPattern,
+						patterns?.email
+					)
+				"
+			>
+				This is not a valid email address
+			</ng-container>
+
+			<ng-container
+				*ngIf="
+					compareRegex(
+						errors['pattern'].requiredPattern,
+						patterns?.alphanumeric
+					)
+				"
+			>
+				The field only allows alphanumeric values
+			</ng-container>
+
+			<ng-container
+				*ngIf="
+					compareRegex(
+						errors['pattern'].requiredPattern,
+						patterns?.alfanumeric_with_puntuaction
+					)
+				"
+			>
+				The field only allows alphanumeric values punctuation marks or
+				accents
+			</ng-container>
+
+			<ng-container
+				*ngIf="
+					compareRegex(
+						errors['pattern'].requiredPattern,
+						patterns?.alphabetic
+					)
+				"
+			>
+				The field only allows Alphabetic values
+			</ng-container>
+
+			<ng-container
+				*ngIf="
+					compareRegex(
+						errors['pattern'].requiredPattern,
+						patterns?.dni
+					)
+				"
+			>
+				The format of the field is 1 valid letter, hyphen and numbers
+				(min 6 and max 9)
+			</ng-container>
+		</ng-container>
+
+		<ng-container *ngIf="!errors['pattern']">
+			<ng-container *ngIf="errors['inUse']">
+				Is already in use
+			</ng-container>
+
+			<ng-container *ngIf="errors['notSame']">
+				The fields <strong> do not match </strong>
+			</ng-container>
+
+			<ng-container *ngIf="errors['minlength']">
+				You must write at least
+				<strong>{{ errors['minlength'].requiredLength }}</strong>
+				characters
+			</ng-container>
+
+			<ng-container *ngIf="errors['maxlength']">
+				The maximum number of characters allowed is
+				<strong>{{ errors['maxlength'].requiredLength }}</strong>
+			</ng-container>
+
+			<ng-container *ngIf="errors['requireMatchAutoComplete']">
+				You must select an item
+			</ng-container>
+
+			<ng-container *ngIf="errors['max']">
+				The maximum number allowed is {{ errors['max'].max }}
+			</ng-container>
+
+			<ng-container *ngIf="errors['min']">
+				The minimum number allowed is {{ errors['min'].min }}
+			</ng-container>
+
+			<ng-container *ngIf="errors['email']">
+				This is not a valid email address
+			</ng-container>
+		</ng-container>
+	</ng-container>
+</ng-container>

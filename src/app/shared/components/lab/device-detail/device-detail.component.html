@@ -1,0 +1,179 @@
+<ion-fab
+	slot="fixed"
+	vertical="top"
+	horizontal="end"
+	class="d-flex"
+	*ngIf="user?.isEditor || user?.isAdmin"
+>
+	<app-small-button
+		size="small"
+		icon="pencil"
+		(click)="onEditButtonClick()"
+	></app-small-button>
+	<app-small-button
+		class="ml-2"
+		size="small"
+		icon="cash"
+		(click)="onMoneyButtonClick()"
+	></app-small-button>
+</ion-fab>
+<ion-toolbar color="light" mode="ios" class="mb-3">
+	<div class="w-100 d-flex justify-content-center font-medium">
+		<ion-icon color="primary" name="qr-code"></ion-icon>
+		<div class="mb-1 ml-2 font-weight-bold">
+			{{ data?.code | number: '9.0-0' | replace: ',':'' }}
+		</div>
+	</div>
+</ion-toolbar>
+<div class="w-100 d-flex justify-content-center align-items-center mb-5">
+	<div class="shadow image">
+		<app-avatar
+			size="large"
+			[rounded]="false"
+			[alt]="data?.brand"
+			[src]="data?.image?.url_thumb || data?.image?.url"
+		></app-avatar>
+	</div>
+</div>
+
+<ion-item color="light" lines="none">
+	<ion-icon name="barcode" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">Serial:</ion-label>
+	<p class="m-0" slot="end">{{ data?.serial }}</p>
+</ion-item>
+<ion-item color="light" lines="none">
+	<ion-icon name="hardware-chip" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">Device:</ion-label>
+	<p class="m-0" slot="end">{{ data?.type | titlecase }}</p>
+</ion-item>
+<ion-item color="light" lines="none">
+	<ion-icon name="flag" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">Brand:</ion-label>
+	<p class="m-0" slot="end">{{ data?.brand | titlecase }}</p>
+</ion-item>
+<ion-item color="light" lines="none">
+	<ion-icon name="extension-puzzle" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">Model:</ion-label>
+	<p class="m-0" slot="end">{{ data?.model | uppercase }}</p>
+</ion-item>
+<ion-item color="light" lines="none">
+	<ion-icon name="color-palette" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">Color:</ion-label>
+	<div
+		[ngStyle]="{ backgroundColor: data?.color }"
+		class="rounded p-2 px-4"
+		slot="end"
+	></div>
+</ion-item>
+<ion-item
+	color="light"
+	lines="none"
+	detail
+	button
+	(click)="onStatusItemClick()"
+	[disabled]="
+		(!user?.isEditor && !user?.isAdmin) ||
+		(!user?.isAdmin && !!data?.egress_date)
+	"
+>
+	<ion-icon name="battery-charging" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">Status:</ion-label>
+	<p class="m-0" slot="end">{{ data?.status | uppercase }}</p>
+</ion-item>
+<ion-item
+	color="light"
+	lines="none"
+	detail
+	button
+	(click)="onWorkerItemClick()"
+	[disabled]="
+		(!user?.isEditor && !user?.isAdmin) ||
+		(!user?.isAdmin && !!data?.member_id)
+	"
+>
+	<ion-icon name="person" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">Worker:</ion-label>
+	<p class="m-0" slot="end">{{ member?.name || 'unknown' | titlecase }}</p>
+</ion-item>
+<ion-item color="light" lines="none">
+	<ion-icon name="calendar" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">Admission Date:</ion-label>
+	<p class="m-0" slot="end">{{ data?.admission_date?.toDate() | date }}</p>
+</ion-item>
+<ion-item
+	color="light"
+	lines="none"
+	[disabled]="
+		(!user?.isEditor && !user?.isAdmin) ||
+		(!user?.isAdmin && !!data?.egress_date)
+	"
+	detail
+	button
+	(click)="datepicker?.open()"
+>
+	<ion-icon name="calendar-clear" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">Finished Date:</ion-label>
+	<ion-datetime
+		#datepicker
+		(ionChange)="onFinishedDateChange($event)"
+		[value]="data?.finished_date?.toDate()?.toISOString()"
+		displayFormat="DDDD MMM D, YYYY HH:mm"
+		[min]="today?.getFullYear()"
+		[max]="today?.getFullYear() + 5"
+		(click)="$event?.stopPropagation()"
+	></ion-datetime>
+</ion-item>
+<ion-item
+	color="light"
+	lines="none"
+	[disabled]="
+		(!user?.isEditor && !user?.isAdmin) ||
+		(!user?.isAdmin && !!data?.egress_date)
+	"
+	detail
+	button
+	(click)="datepicker_?.open()"
+>
+	<ion-icon name="today" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">Egress Date:</ion-label>
+	<ion-datetime
+		#datepicker_
+		(ionChange)="onEgressDateChange($event)"
+		[value]="data?.egress_date?.toDate()?.toISOString()"
+		displayFormat="DDDD MMM D, YYYY HH:mm"
+		[min]="today?.getFullYear()"
+		[max]="today?.getFullYear() + 5"
+		(click)="$event?.stopPropagation()"
+	></ion-datetime>
+</ion-item>
+<ion-item
+	detail
+	button
+	color="light"
+	lines="none"
+	(click)="onDescriptionItemClick()"
+>
+	<ion-icon name="document-text" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">
+		Description: <br />
+		<ion-text>
+			{{ data?.description }}
+		</ion-text>
+	</ion-label>
+</ion-item>
+<ion-item
+	*ngIf="data?.details"
+	detail
+	button
+	color="light"
+	lines="none"
+	(click)="onDetailItemClick()"
+>
+	<ion-icon name="bug" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">
+		Details:<br />
+		<ion-text>
+			{{ data?.details }}
+		</ion-text>
+	</ion-label>
+</ion-item>

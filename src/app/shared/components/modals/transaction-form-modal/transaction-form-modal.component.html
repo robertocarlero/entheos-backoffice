@@ -1,0 +1,10 @@
+<app-modal-header (close)="onCloseButtonClick()"></app-modal-header>
+
+<ion-content color="light">
+	<app-transaction-form
+		[data]="data"
+		(output)="onFormOutput($event)"
+		[customer]="customer"
+		[device]="device"
+	></app-transaction-form>
+</ion-content>

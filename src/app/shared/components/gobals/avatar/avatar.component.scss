@@ -1,0 +1,27 @@
+ion-thumbnail {
+	overflow: hidden;
+	background: var(--ion-color-light);
+	width: 100% !important;
+	height: 100% !important;
+	ion-label {
+		font-size: 18px;
+	}
+	img {
+		&.contain {
+			object-fit: contain;
+		}
+		&.cover {
+			object-fit: cover;
+		}
+	}
+	&.large {
+		ion-label {
+			font-size: 36px !important;
+		}
+	}
+	&.big {
+		ion-label {
+			font-size: 56px !important;
+		}
+	}
+}

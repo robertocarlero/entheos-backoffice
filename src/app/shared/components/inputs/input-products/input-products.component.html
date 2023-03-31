@@ -1,0 +1,80 @@
+<div #container>
+	<ion-item
+		*ngFor="let item of products; let i = index"
+		color="light"
+		[disabled]="disabled"
+		[lines]="line ? 'line' : 'none'"
+	>
+		<app-avatar
+			class="avatar mr-2"
+			[src]="item?.product?.image?.url_thumb || item?.product?.image?.url"
+			[alt]="item?.product?.name"
+		></app-avatar>
+		<ion-label>
+			{{ item?.product?.name }}
+			<p class="m-0 text-secondary">
+				{{ item?.product?.price?.value | number: '1.2-2' }}
+				{{ item?.product?.price?.coin }}
+			</p>
+		</ion-label>
+		<ion-buttons slot="end">
+			<ion-button
+				[disabled]="disabled"
+				(click)="onRemoveButtonClick(item?.product)"
+			>
+				<ion-icon slot="icon-only" name="remove"></ion-icon>
+			</ion-button>
+			<input
+				class="counter mx-2"
+				type="number"
+				[(ngModel)]="products[i].quantity"
+				(ngModelChange)="onInputChange()"
+				(blur)="onInputBlur(item?.quantity, item?.product)"
+				min="1"
+				max="100"
+				(keyup.enter)="onKeyUpEnter(container, i)"
+			/>
+			<ion-button
+				[disabled]="disabled"
+				(click)="onAddButtonClick(item?.product)"
+			>
+				<ion-icon slot="icon-only" name="add"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-item>
+</div>
+<ion-item
+	color="light"
+	detail
+	[disabled]="disabled"
+	button
+	*ngIf="!products?.length"
+	(click)="onAddProductButtonClick()"
+>
+	<app-avatar class="avatar mr-2"></app-avatar>
+	<ion-label>
+		Product
+		<p class="text-secondary">Click to select a product</p>
+	</ion-label>
+</ion-item>
+<div
+	class="w-100 d-flex justify-content-end"
+	*ngIf="products?.length && !disabled"
+>
+	<ion-fab-button
+		size="small"
+		class="my-3"
+		(click)="onCleanButtonClick()"
+		color="danger"
+	>
+		<ion-icon name="trash"></ion-icon>
+	</ion-fab-button>
+	<ion-fab-button
+		size="small"
+		class="my-3"
+		(click)="onAddProductButtonClick()"
+		color="success"
+	>
+		<ion-icon name="add"></ion-icon>
+	</ion-fab-button>
+</div>

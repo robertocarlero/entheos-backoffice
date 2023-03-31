@@ -1,0 +1,70 @@
+<div class="w-100 p-3 overflow-visible d-flex flex-column align-items-center">
+	<div class="image r-5 my-4 shadow-sm overflow-hidden">
+		<app-input-image
+			[src]="img_url"
+			(output)="onInputImageOutput($event)"
+		></app-input-image>
+	</div>
+	<form class="w-100" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+		<app-input-products
+			[disabled]="edit"
+			*ngIf="products"
+			[line]="true"
+			[detail]="true"
+			[list]="products"
+			formControlName="products"
+		></app-input-products>
+		<app-input-user
+			[line]="true"
+			[detail]="true"
+			[list]="customers.all"
+			title="Customer"
+			formControlName="customer_id"
+		></app-input-user>
+		<app-input-user
+			title="Entry Balance"
+			[line]="true"
+			[detail]="true"
+			[list]="users.active"
+			formControlName="entry_balance"
+		></app-input-user>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Description</mat-label>
+			<textarea
+				matInput
+				formControlName="description"
+				placeholder="High and low heart rate notifications irregular heart rhythm notification..."
+				[errorStateMatcher]="matcher"
+			></textarea>
+			<mat-error *ngIf="form?.get('description')?.invalid">
+				<app-errors
+					[errors]="form?.get('description')?.errors"
+				></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Warranty</mat-label>
+			<input
+				matInput
+				formControlName="warranty"
+				placeholder="Ex. 30 days"
+				[errorStateMatcher]="matcher"
+			/>
+			<mat-error *ngIf="form?.get('warranty')?.invalid">
+				<app-errors
+					[errors]="form?.get('warranty')?.errors"
+				></app-errors>
+			</mat-error>
+		</mat-form-field>
+	</form>
+	<ion-item color="light" class="w-100">
+		<ion-label class="font-weight-bold"> Total: </ion-label>
+		<p class="m-0 ml-auto">{{ total?.value }} {{ total?.coin }}</p>
+	</ion-item>
+	<br />
+	<br />
+	<br />
+</div>
+<div class="float-button">
+	<app-save-button (click)="onSaveButtonClick()" size="big"></app-save-button>
+</div>

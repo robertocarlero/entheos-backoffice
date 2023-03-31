@@ -1,0 +1,121 @@
+<div class="w-100 p-3 overflow-visible d-flex flex-column align-items-center">
+	<div class="image r-5 my-4 shadow-sm overflow-hidden">
+		<app-input-image
+			[src]="img_url"
+			(output)="onInputImageOutput($event)"
+		></app-input-image>
+	</div>
+	<form class="w-100" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+		<ng-container formGroupName="amount">
+			<mat-form-field class="w-50 pr-1" appearance="outline">
+				<mat-label>Amount</mat-label>
+				<mat-icon matPrefix>attach_money</mat-icon>
+				<input
+					matInput
+					required
+					formControlName="value"
+					placeholder="Ex. 1000420"
+					type="number"
+					[errorStateMatcher]="matcher"
+					(keyup.enter)="type?.focus()"
+				/>
+				<mat-error *ngIf="form.get('amount').get('value')?.invalid">
+					<app-errors
+						[errors]="form.get('amount').get('value')?.errors"
+					></app-errors>
+				</mat-error>
+			</mat-form-field>
+		</ng-container>
+		<mat-form-field class="w-50 pl-1" appearance="outline">
+			<mat-label>Type</mat-label>
+			<mat-icon matPrefix>style</mat-icon>
+			<mat-select
+				#type
+				matInput
+				required
+				formControlName="type"
+				[errorStateMatcher]="matcher"
+			>
+				<mat-option *ngFor="let type of types" [value]="type">{{
+					type | titlecase
+				}}</mat-option>
+			</mat-select>
+			<mat-error *ngIf="form.get('type')?.invalid">
+				<app-errors [errors]="form.get('type')?.errors"> </app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Date</mat-label>
+			<mat-icon matPrefix>today</mat-icon>
+			<input
+				matInput
+				required
+				formControlName="date"
+				[matDatepicker]="datepicker"
+				[errorStateMatcher]="matcher"
+				(focus)="datepicker?.open()"
+			/>
+			<mat-datepicker #datepicker></mat-datepicker>
+			<mat-error *ngIf="form.get('date')?.invalid">
+				<app-errors [errors]="form.get('date')?.errors"> </app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Description</mat-label>
+			<textarea
+				matInput
+				formControlName="description"
+				placeholder="Buy a new part to repair the device..."
+				[errorStateMatcher]="matcher"
+			></textarea>
+			<mat-error *ngIf="form.get('description')?.invalid">
+				<app-errors
+					[errors]="form.get('description')?.errors"
+				></app-errors>
+			</mat-error>
+		</mat-form-field>
+		<ng-container *ngIf="type.value">
+			<app-input-user
+				title="Entry Balance"
+				*ngIf="entryBalanceIsVisible"
+				[line]="true"
+				[detail]="true"
+				[list]="users.active"
+				formControlName="entry_balance"
+			></app-input-user>
+			<app-input-user
+				title="Out Balance"
+				*ngIf="outBalanceIsVisible"
+				[line]="true"
+				[detail]="true"
+				[list]="users.active"
+				formControlName="out_balance"
+			></app-input-user>
+			<app-input-user
+				*ngIf="!outBalanceIsVisible || !entryBalanceIsVisible"
+				[line]="true"
+				[detail]="true"
+				[list]="customers.all"
+				[disabled]="!!customer"
+				title="Customer"
+				formControlName="customer_id"
+			></app-input-user>
+			<app-input-device
+				*ngIf="!outBalanceIsVisible || !entryBalanceIsVisible"
+				[line]="true"
+				[detail]="true"
+				[list]="devices_list"
+				[disabled]="!!device"
+				title="Device"
+				formControlName="device_id"
+			></app-input-device>
+		</ng-container>
+
+		<ion-item color="light" lines="none">
+			<app-input-color formControlName="color"></app-input-color>
+		</ion-item>
+	</form>
+</div>
+<div class="float-button">
+	<app-save-button (click)="onSaveButtonClick()" size="big"></app-save-button>
+</div>

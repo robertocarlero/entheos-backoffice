@@ -1,0 +1,19 @@
+#container {
+	background: none;
+}
+
+.item {
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	&.shadow {
+		transform: scale(1.2);
+	}
+}
+
+input {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	visibility: hidden;
+}

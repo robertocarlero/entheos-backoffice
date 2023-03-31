@@ -1,0 +1,11 @@
+<app-modal-header
+	[title]="data?.title"
+	(close)="onCloseButtonClick()"
+></app-modal-header>
+
+<ion-content color="light">
+	<app-users-list
+		[data]="data"
+		(output)="onListOutput($event)"
+	></app-users-list>
+</ion-content>

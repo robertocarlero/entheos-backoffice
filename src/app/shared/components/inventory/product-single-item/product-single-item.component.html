@@ -1,0 +1,26 @@
+<ion-item
+	mode="md"
+	color="light"
+	class="ion-no-border"
+	[button]="button"
+	[detail]="detail"
+	[disabled]="disabled"
+	[lines]="line ? 'line' : 'none'"
+>
+	<app-avatar
+		class="avatar mr-2"
+		[src]="image"
+		[alt]="data?.name"
+	></app-avatar>
+	<ion-label>
+		{{ data?.name }}
+		<p class="m-0 text-secondary">
+			{{ data?.price?.value | number: '1.2-2' }} {{ data?.price?.coin }}
+		</p>
+	</ion-label>
+	<ion-buttons *ngIf="!!customIcon && !detail" slot="end">
+		<ion-button (click)="onCustomButtonClick($event)">
+			<ion-icon slot="icon-only" [name]="customIcon"></ion-icon>
+		</ion-button>
+	</ion-buttons>
+</ion-item>

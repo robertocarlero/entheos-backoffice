@@ -1,0 +1,46 @@
+<div id="container" class="w-100 h-100 p-4">
+	<ion-text class="mb-5">
+		<ion-label class="font-medium my-3">Phone number</ion-label>
+		<p>
+			Make sure you have your phone close by and with a signal for the
+			next operation
+		</p>
+	</ion-text>
+
+	<form [formGroup]="form">
+		<mat-form-field appearance="outline" class="w-100">
+			<mat-label>Phone number</mat-label>
+			<app-input-tel
+				inputmode="numeric"
+				matInput
+				formControlName="phoneNumber"
+			></app-input-tel>
+			<mat-error *ngIf="form.get('phoneNumber')?.invalid">
+				<app-errors [errors]="form.get('phoneNumber')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="w-100" *ngIf="sended">
+			<mat-label>Code</mat-label>
+			<input
+				matInput
+				type="number"
+				formControlName="code"
+				[errorStateMatcher]="matcher"
+			/>
+			<mat-error *ngIf="form.get('code')?.invalid">
+				<app-errors [errors]="form.get('code')?.errors"> </app-errors>
+			</mat-error>
+		</mat-form-field>
+	</form>
+
+	<div class="footer-button p-4 w-100">
+		<ion-button
+			class="shadow-none radius-all w-100"
+			(click)="onButtonClick()"
+		>
+			{{ sended ? 'Confirm' : 'Send' }}
+		</ion-button>
+	</div>
+</div>

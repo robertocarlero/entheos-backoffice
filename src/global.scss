@@ -1,0 +1,171 @@
+@import 'theme/fonts.scss';
+@import 'theme/mixins.scss';
+@import 'theme/variables.scss';
+
+@import '~@ionic/angular/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import '~@ionic/angular/css/padding.css';
+
+* {
+	font-family: 'Poppins' !important;
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+}
+
+ion-text {
+	text-overflow: none !important;
+}
+
+mat-icon {
+	font-family: 'Material Icons' !important;
+}
+
+ion-label {
+	font-size: 16px !important;
+}
+
+p {
+	font-size: 14px;
+}
+
+img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+h1 {
+	font-weight: bold !important;
+	font-size: 36px !important;
+	text-align: center !important;
+}
+
+.transparent {
+	background: transparent !important;
+	background-color: transparent !important;
+	--background-color: transparent !important;
+	--background: transparent !important;
+	--ion-toolbar-background-color: transparent !important;
+}
+
+.float-button {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 100;
+}
+
+.app {
+	&-max-width {
+		width: 100%;
+		max-width: 768px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.toolbar-sticky {
+	position: sticky !important;
+	top: 0;
+	z-index: 1000;
+}
+
+.bg {
+	&-light {
+		&-1 {
+			@include background(var(--background-primary));
+		}
+		&-2 {
+			@include background(var(--background-secondary));
+		}
+		&-3 {
+			@include background(var(--background-tertiary));
+		}
+	}
+	&-gradient {
+		&-1 {
+			@include gradient(
+				var(--gradient-primary),
+				var(--gradient-primary-color)
+			);
+		}
+
+		&-2 {
+			@include gradient(
+				var(--gradient-secondary),
+				var(--gradient-secondary-color)
+			);
+		}
+	}
+}
+
+.button-card {
+	@include square-fixed(40px);
+	@include flex-center;
+	border-radius: 10px;
+	font-size: 20px;
+	color: white;
+	cursor: pointer;
+	&.primary {
+		@include gradient(
+			var(--gradient-primary),
+			var(--gradient-primary-color)
+		);
+	}
+	&.secondary {
+		@include gradient(
+			var(--gradient-secondary),
+			var(--gradient-secondary-color)
+		);
+	}
+	&.small {
+		@include square-fixed(30px);
+		border-radius: 6px;
+	}
+	&.large {
+		width: 60px;
+		height: 35px;
+		min-width: 60px;
+		min-height: 35px;
+	}
+}
+
+.overflow {
+	&-visible {
+		overflow: visible !important;
+	}
+}
+
+.font {
+	&-small {
+		font-size: 10px !important;
+		line-height: 10px;
+	}
+	&-standard {
+		font-size: 13px !important;
+		line-height: 13px;
+	}
+	&-medium {
+		font-size: 24px !important;
+		line-height: 24px;
+	}
+	&-large {
+		font-size: 40px !important;
+		line-height: 40px;
+	}
+	&-big {
+		font-size: 44px !important;
+		line-height: 44px;
+	}
+	&-primary {
+		font-family: 'Poppins' !important;
+	}
+}

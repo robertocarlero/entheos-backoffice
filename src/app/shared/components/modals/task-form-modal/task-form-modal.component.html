@@ -1,0 +1,10 @@
+<app-modal-header (close)="onCloseButtonClick()"></app-modal-header>
+
+<ion-content color="light">
+	<app-task-form
+		[data]="data"
+		(output)="onFormOutput($event)"
+		[customer]="customer"
+		[device]="device"
+	></app-task-form>
+</ion-content>

@@ -1,0 +1,62 @@
+<ion-toolbar color="light" mode="ios" class="mb-3">
+	<div class="w-100 d-flex justify-content-center font-medium">
+		<ion-icon class="ml-3" color="primary" name="qr-code"></ion-icon>
+		<div class="mb-1 ml-2 font-weight-bold">
+			{{ data?.product_id }}
+		</div>
+	</div>
+</ion-toolbar>
+<div class="w-100 d-flex justify-content-center align-items-center mb-5">
+	<div class="shadow image">
+		<app-avatar
+			size="large"
+			[rounded]="false"
+			[alt]="data?.name"
+			[src]="data?.image?.url_thumb || data?.image?.url"
+		></app-avatar>
+	</div>
+</div>
+
+<ion-item color="light" lines="none">
+	<ion-icon name="cash" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">Price:</ion-label>
+	<p class="m-0" slot="end">
+		{{ data?.price?.value | number: '1.2-2' }}
+		{{ data?.price?.coin }}
+	</p>
+</ion-item>
+<ion-item color="light" lines="none">
+	<ion-icon name="albums" color="primary" slot="start"></ion-icon>
+	<ion-label
+		[color]="data?.stock ? 'success' : 'danger'"
+		class="font-weight-bold"
+		>Stock:</ion-label
+	>
+	<p class="m-0" slot="end">{{ data?.stock || 'out of stock' }}</p>
+</ion-item>
+
+<ion-item color="light" lines="none">
+	<ion-icon name="document-text" color="primary" slot="start"></ion-icon>
+	<ion-label class="font-weight-bold">
+		Description: <br />
+		<ion-text>
+			{{ data?.description }}
+		</ion-text>
+	</ion-label>
+</ion-item>
+<div class="float-button d-flex flex-column">
+	<app-small-button
+		(click)="onDeleteButtonClick()"
+		size="big"
+		icon="trash"
+		color="secondary"
+		class="mb-2"
+		*ngIf="user?.isAdmin"
+	></app-small-button>
+	<app-small-button
+		(click)="onEditButtonClick()"
+		size="big"
+		icon="pencil"
+		*ngIf="user?.isAdmin"
+	></app-small-button>
+</div>

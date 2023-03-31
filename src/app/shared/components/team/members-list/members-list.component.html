@@ -1,0 +1,24 @@
+<ion-toolbar color="light" class="toolbar-sticky py-2 px-3 mb-3" *ngIf="search">
+	<app-searchbar (output)="onSearchbarOutput($event)"></app-searchbar>
+</ion-toolbar>
+
+<section class="w-100 px-3">
+	<div class="mb-3" *ngFor="let item of data?.items">
+		<app-member-item
+			(output)="onOneMemberOutput($event)"
+			[data]="item"
+		></app-member-item>
+	</div>
+</section>
+
+<div class="float-button" *ngIf="user?.isAdmin">
+	<app-add-button (click)="onAddButtonClick()" size="big"></app-add-button>
+</div>
+
+<ion-infinite-scroll threshold="100px" (ionInfinite)="onScrollShot($event)">
+	<ion-infinite-scroll-content
+		loadingSpinner="crescent"
+		loadingText="Cargando..."
+	>
+	</ion-infinite-scroll-content>
+</ion-infinite-scroll>

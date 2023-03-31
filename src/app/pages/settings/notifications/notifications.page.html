@@ -1,0 +1,22 @@
+<ion-header class="ion-no-border">
+	<ion-toolbar color="light">
+		<ion-back-button slot="start" defaultHref="settings">
+			<ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+		</ion-back-button>
+		<ion-title mode="ios">Notifications</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+	<div class="content mx-auto app-max-width w-100 h-100 pt-3">
+		<app-topic-item *ngFor="let item of  topicsServices?.all" [data]="item">
+		</app-topic-item>
+	</div>
+	<div class="float-button">
+		<app-small-button
+			(click)="onAddButtonClick()"
+			size="big"
+			icon="notifications-outline"
+		></app-small-button>
+	</div>
+</ion-content>

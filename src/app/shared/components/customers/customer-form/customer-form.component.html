@@ -1,0 +1,163 @@
+<div class="w-100 p-3 overflow-visible d-flex flex-column align-items-center">
+	<div class="image r-5 my-4 shadow-sm overflow-hidden">
+		<app-input-image
+			[src]="img_url"
+			(output)="onInputImageOutput($event)"
+		></app-input-image>
+	</div>
+	<form class="w-100" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>DNI</mat-label>
+			<mat-icon matPrefix>badge</mat-icon>
+			<input
+				type="text"
+				matInput
+				required
+				formControlName="dni"
+				inputType="dni"
+				placeholder="Ex. V-60213410"
+				(keyup.enter)="a?.focus()"
+				(blur)="onDniInputBlur()"
+			/>
+			<mat-error *ngIf="form?.get('dni')?.invalid">
+				<app-errors [errors]="form?.get('dni')?.errors"> </app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Name</mat-label>
+			<mat-icon matPrefix>person</mat-icon>
+			<input
+				#a
+				autofocus
+				matInput
+				required
+				formControlName="name"
+				placeholder="Ex. Jhon Doe"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="b?.focus()"
+			/>
+			<mat-error *ngIf="form?.get('name')?.invalid">
+				<app-errors [errors]="form?.get('name')?.errors"> </app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Email</mat-label>
+			<mat-icon matPrefix>alternate_email</mat-icon>
+			<input
+				#b
+				matInput
+				formControlName="email"
+				placeholder="Ex. jhondoe@mail.com"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="c?.focus()"
+			/>
+			<mat-error *ngIf="form?.get('email')?.invalid">
+				<app-errors [errors]="form?.get('email')?.errors"> </app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Phone number</mat-label>
+			<mat-icon matPrefix>phone</mat-icon>
+			<app-input-tel
+				#c
+				matInput
+				type="tel"
+				inputmode="numeric"
+				formControlName="phoneNumber"
+				placeholder="0410 333 4444"
+				(keyup.enter)="d?.focus()"
+			></app-input-tel>
+			<mat-error *ngIf="form?.get('phoneNumber')?.invalid">
+				<app-errors [errors]="form?.get('phoneNumber')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>WhatsApp</mat-label>
+			<mat-icon matPrefix>phone</mat-icon>
+			<app-input-tel
+				#d
+				matInput
+				inputmode="numeric"
+				type="tel"
+				formControlName="whatsappNumber"
+				placeholder="0410 333 4444"
+				(keyup.enter)="e?.focus()"
+			></app-input-tel>
+			<mat-error *ngIf="form?.get('whatsappNumber')?.invalid">
+				<app-errors [errors]="form?.get('whatsappNumber')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Address</mat-label>
+			<mat-icon matPrefix>location_on</mat-icon>
+			<input
+				#e
+				matInput
+				required
+				formControlName="address"
+				placeholder="1007 de Mountain Drive, Gotham"
+				[errorStateMatcher]="matcher"
+				(keyup.enter)="f?.focus()"
+			/>
+			<mat-error *ngIf="form?.get('address')?.invalid">
+				<app-errors [errors]="form?.get('address')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Date of Birth</mat-label>
+			<mat-icon matPrefix>today</mat-icon>
+			<input
+				#f
+				matInput
+				formControlName="birthday"
+				[matDatepicker]="datepicker"
+				[errorStateMatcher]="matcher"
+				(focus)="datepicker?.open()"
+				(dateChange)="g?.focus(); g?.open()"
+			/>
+			<mat-datepicker #datepicker></mat-datepicker>
+			<mat-error *ngIf="form?.get('birthday')?.invalid">
+				<app-errors [errors]="form?.get('birthday')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>gender</mat-label>
+			<mat-icon matPrefix>people</mat-icon>
+			<mat-select
+				#g
+				required
+				formControlName="gender"
+				[errorStateMatcher]="matcher"
+			>
+				<mat-option value="male">Male</mat-option>
+				<mat-option value="female">Female</mat-option>
+				<mat-option value="other">Other</mat-option>
+			</mat-select>
+			<mat-error *ngIf="form?.get('gender')?.invalid">
+				<app-errors [errors]="form?.get('gender')?.errors">
+				</app-errors>
+			</mat-error>
+		</mat-form-field>
+		<mat-form-field class="w-100" appearance="outline">
+			<mat-label>Aditional info</mat-label>
+			<textarea
+				matInput
+				formControlName="additional_info"
+				placeholder="Write any description or details to remember..."
+				[errorStateMatcher]="matcher"
+			></textarea>
+			<mat-error *ngIf="form.get('additional_info')?.invalid">
+				<app-errors
+					[errors]="form.get('additional_info')?.errors"
+				></app-errors>
+			</mat-error>
+		</mat-form-field>
+	</form>
+</div>
+<div class="float-button">
+	<app-save-button (click)="onSaveButtonClick()" size="big"></app-save-button>
+</div>

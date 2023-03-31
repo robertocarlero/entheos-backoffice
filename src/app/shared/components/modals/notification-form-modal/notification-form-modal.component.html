@@ -1,0 +1,9 @@
+<app-modal-header
+	title="Send Notification"
+	(close)="onCloseButtonClick()"
+></app-modal-header>
+<ion-content color="light">
+	<app-notification-form
+		(output)="onFormOutput($event)"
+	></app-notification-form>
+</ion-content>
